@@ -11,6 +11,7 @@ const MATERIAL = sequelize.define('Material', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     hardness: {
         type: DataTypes.STRING,
