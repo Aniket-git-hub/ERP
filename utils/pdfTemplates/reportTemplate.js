@@ -9,66 +9,139 @@ function generateReportTemplate(data, query) {
     // Add more conditions as needed
 
     let html = `
-    <html>
+    <!DOCTYPE html>
+        <html lang="en">
+
         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Report </title>
             <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
                 body {
                     font-family: Arial, sans-serif;
-                    counter-reset: rowNumber 0;
+                    counter-reset: page;
+                    font-size: smaller;
+                    color: #333;
+                    line-height: 1.6;
                 }
-                h1 {
+
+                h1,
+                h2 {
+                    color: #444;
+                }
+
+                h2 {
                     text-align: center;
+                    margin-bottom: .3rem;
                 }
+
                 table {
                     width: 100%;
                     border-collapse: collapse;
+                    margin-bottom: 2rem;
+                    counter-reset: rowNumber;
                 }
-                th, td {
-                    border: 1px solid #ddd;
+
+                th,
+                td {
+                    border: 1px solid #d7d7d7;
                     padding: 8px;
+                    position: relative;
                 }
+
+                tr:nth-child(even) {
+                    background-color: rgb(244, 244, 244);
+                }
+
                 th {
-                    background-color: #f2f2f2;
+                    background-color: #343434;
+                    color: white;
                     text-align: left;
                 }
+
                 thead {
                     display: table-header-group;
                 }
+
                 tr {
                     page-break-inside: avoid;
                 }
+
                 tr td:first-child::before {
                     counter-increment: rowNumber;
                     content: counter(rowNumber);
+                    display: block;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: 0;
+                    width: 100%;
+                    position: absolute;
+                    text-align: center;
+
                 }
-                .pageBreak {
-                    page-break-after: always;
+
+                header {
+                    width: 100%;
+                }
+
+                header section {
+                    width: 100%;
+                    text-align: center;
+                    border-bottom: 1px solid #343434;
+                    margin-bottom: .5rem;
+                }
+
+                h1 {
+                    font-size: 1.5rem;
+                }
+
+                #pageNumber::after {
+                    counter-increment: page;
+                    content: "Page " counter(page);
                 }
             </style>
         </head>
+
         <body>
-            <h1>${title}</h1>
+            <header>
+                <section>
+                    <h1>Madhu Enterprises</h1>
+                    <p>
+                        <b>Phone: <span>9130827065</span>, <span>9130827065</span></b>
+                    </p>
+                    <p>
+                        <b>GST: <span>32AAHCR7467A1ZI</span></b>
+                    </p>
+                    <p>
+                        <b>email: <span>madhuenterprisespune@gmail.com</span></b>
+                    </p>
+                </section>
+                <h2>Report on SS Enterprises</h2>
+            </header>
             <table>
                 <thead>
                     <tr>
                         <th>S.No</th>
-                        <th>Drawing Number</th>
+                        <th>Drawing</th>
                         <th>Description</th>
                         <th>Date</th>
-                        <th>Quantity</th>
+                        <th>Qty</th>
                         <th>Rate</th>
                         <th>Size</th>
-                        <th>Client Name</th>
-                        <th>Material Name</th>
+                        <th>Client</th>
+                        <th>Material</th>
                     </tr>
                 </thead>
-                <tbody>`;
+                <tbody>
+    `;
 
     data.items.forEach((item, index) => {
-        if (index > 0 && index % 50 === 0) {
-            // Insert a page break after every 50 rows
-            html += `<tr class="pageBreak"></tr>`;
-        }
         html += `
                     <tr>
                         <td></td>

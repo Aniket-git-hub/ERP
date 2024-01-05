@@ -7,10 +7,9 @@ async function getJobsController(req, res, next) {
     try {
         const jobs = await getFilteredJobsService(parseInt(page), parseInt(limit), filters);
         if (pdf) {
-
             const pdfBuffer = await generatePDF(generateReportTemplate(jobs, req.query))
             res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', `attachment; filename=${req.query.queryString}.pdf`);
+            res.setHeader('Content-Disposition', `attachment; filename=report.pdf`);
             res.send(pdfBuffer);
         } else {
             res.json(jobs);

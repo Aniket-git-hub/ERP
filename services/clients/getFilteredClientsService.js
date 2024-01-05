@@ -3,7 +3,7 @@ import buildWhereClause from '../../utils/buildWhereClause.js';
 
 async function getFilteredClientsService(page = 1, limit = 10, filters = {}) {
     const offset = (page - 1) * limit;
-    const whereClause = buildWhereClause(filters, ['name', 'email', 'gst', 'phone', 'createdAt', 'updatedAt'])
+    const whereClause = buildWhereClause(filters, ['name', 'email', 'gst', 'phone', 'createdAt', 'updatedAt'], 'createdAt')
     try {
         const items = await CLIENT.findAndCountAll({
             offset,

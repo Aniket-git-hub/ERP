@@ -11,9 +11,11 @@ async function generatePDF(pageTemplate) {
     await page.emulateMediaType('screen');
 
     const pdfBuffer = await page.pdf({
-        margin: { top: '50px', right: '50px', bottom: '50px', left: '50px' },
+        margin: { top: '25px', right: '25px', bottom: '25px', left: '25px' },
         printBackground: true,
         format: 'A4',
+        displayHeaderFooter: true,
+        footerTemplate: `<div style="font-size:10px; text-align:center; width:100%;"><span class="pageNumber"></span></div>`
     });
     await browser.close();
     return pdfBuffer;
