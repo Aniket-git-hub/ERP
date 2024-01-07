@@ -16,19 +16,43 @@ const INVOICE = sequelize.define('Invoice', {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    billedTo: {
-        type: DataTypes.INTEGER, // Foreign key reference to the Client model
-        allowNull: false,
-    },
     totalQuantity: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    totalAmount: {
+    cGstPercentage: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
     },
-    taxAmount: {
+    iGstPercentage: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    sGstPercentage: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    totalAmountBeforeTax: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    cGstAmount: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    iGstAmount: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    sGstAmount: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    totalTaxAmount: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    totalAmountAfterTax: {
         type: DataTypes.FLOAT,
         allowNull: true,
     },
