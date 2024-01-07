@@ -1,13 +1,22 @@
-function generateReportTemplate(data, query) {
-    let title = 'Report';
-    if (query.clientId) {
-        title += ` for Client ID: ${query.clientId}`;
-    }
-    if (query.date) {
-        title += ` on Date: ${query.date}`;
-    }
-
-
+function generateInvoiceTemplate(
+    client,
+    invoiceDate,
+    invoiceNumber,
+    vehicleNumber,
+    totalQuantity,
+    totalAmountAfterTax,
+    totalAmountBeforeTax,
+    sGstPercentage,
+    cGstPercentage,
+    iGstPercentage,
+    cGstAmount,
+    sGstAmount,
+    iGstAmount,
+    totalTaxAmount,
+    amountInWords,
+    notes,
+    jobs
+) {
     let html = `
     <!DOCTYPE html>
 <html lang="en">
@@ -25,11 +34,6 @@ function generateReportTemplate(data, query) {
 
         p {
             line-height: 1.2rem;
-        }
-
-        body {
-            padding: 1rem;
-            background-color: #f5f5f5;
         }
 
         .header {
@@ -203,10 +207,9 @@ function generateReportTemplate(data, query) {
             <section class="lower">
                 <section class="left">
                     <b>Billed To:</b>
-                    <p>Madhu Enterprises, plot no: 165/3, J - Block, near Indrayani corner, Bhosari MIDC, Bhosari,
-                        Pune-26, Maharashtra</p>
+                    <p>${client.name}, ${client.address}</p>
                     <b>Customer GST No:</b>
-                    <p>32AAHCR7467A1ZI</p>
+                    <p>${client.gst}</p>
                     <b>State:</b>
                     <p>27 - Maharashtra</p>
                 </section>
@@ -214,9 +217,9 @@ function generateReportTemplate(data, query) {
                     <table>
                         <tr>
                             <th>Invoice No:</th>
-                            <td>122</td>
+                            <td>${invoiceNumber}</td>
                             <th>Dated:</th>
-                            <td>20-May-2023</td>
+                            <td>${invoiceDate}</td>
                         </tr>
                         <tr>
                             <th>Our Ch. No:</th>
@@ -238,7 +241,7 @@ function generateReportTemplate(data, query) {
                         </tr>
                         <tr>
                             <th colspan="2">Dispatched through:</th>
-                            <td colspan="2">MH14KL5349</td>
+                            <td colspan="2">${vehicleNumber}</td>
                         </tr>
                     </table>
                 </section>
@@ -253,394 +256,60 @@ function generateReportTemplate(data, query) {
                     <th>Rate</th>
                     <th>Quantity</th>
                     <th>Amount</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>PM_713_14_01</td>
-                    <td> -</td>
-                    <td> 165</td>
-                    <td> 10</td>
-                    <td> 1650</td>
-                </tr>
-                <tr>
+                </tr> `;
+    for (let i = 0; i < jobs.length; i++) {
+        html += `<tr>
+                       <td></td>
+                       <td>${jobs[i].drawingNumber}</td>
+                       <td> -</td>
+                       <td>${jobs[i].rate}</td>
+                       <td> ${jobs[i].quantity}</td>
+                       <td> ${jobs[i].rate * jobs[i].quantity}</td>
+                   </tr> `;
+    }
+    html += `<tr>
                     <th colspan="4">Total</th>
-                    <td colspan="">400</td>
-                    <td>10,02,212</td>
+                    <td colspan="">${totalQuantity}</td>
+                    <td>${totalAmountBeforeTax}</td>
                 </tr>
                 <tr>
                     <th colspan="4">CGST </th>
-                    <th colspan="1"> %</th>
-                    <td>6000</td>
+                    <th colspan="1">${cGstPercentage} %</th>
+                    <td>${cGstAmount}</td>
                 </tr>
                 <tr>
                     <th colspan="4">SGST </th>
-                    <th colspan="1"> %</th>
-                    <td>6000</td>
+                    <th colspan="1">${sGstPercentage} %</th>
+                    <td>${sGstAmount}</td>
                 </tr>
                 <tr>
                     <th colspan="4">IGST </th>
-                    <th colspan="1"> %</th>
-                    <td> - </td>
+                    <th colspan="1">${iGstPercentage} %</th>
+                    <td> ${iGstAmount} </td>
                 </tr>
                 <tr>
                     <th colspan="5">Total Tax Amount</th>
-                    <td> 12000 </td>
+                    <td> ${totalTaxAmount} </td>
                 </tr>
                 <tr>
                     <th colspan="5">Total Chargeable Amount</th>
-                    <td>10,02,212</td>
+                    <td>${totalAmountAfterTax}</td>
                 </tr>
                 <tr>
                     <th>Rupees:</th>
-                    <td colspan="5">One Lakh twenty thousands two hundred and twenty only </td>
+                    <td colspan="5"> ${amountInWords} </td>
                 </tr>
             </table>
             <p class="note">
-                <b>Note:</b>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, quas.</span>
+                <b>Note: </b>
+                <span>${notes}</span>
             </p>
         </div>
         <div class="footer">
             <div class="left">
                 <b>Payment Information</b>
                 <p>IDBI Bank</p>
-                <p>Acc. Name: Letsbug Solution Pvt. Ltd.</p>
+                <p>Acc. Name: Madhu Enterprises</p>
                 <p>Acc. No: 1678102000026674</p>
             </div>
             <div class="right">
@@ -649,7 +318,7 @@ function generateReportTemplate(data, query) {
                     <div></div>
                 </div>
                 <div class="sign">
-                    <b>For Letsbug Solution</b>
+                    <b>For Madhu Enterprises</b>
                     <div></div>
                 </div>
             </div>
@@ -663,11 +332,7 @@ function generateReportTemplate(data, query) {
 </html>
     `;
 
-
-
     return html;
 }
 
-
-
-export default generateReportTemplate;
+export default generateInvoiceTemplate;

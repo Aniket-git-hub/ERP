@@ -1,0 +1,37 @@
+import getInvoiceByIdService from "../../services/invoices/getInvoiceByIdService.js";
+import generatePDF from "../../utils/generatePDF.js";
+import generateInvoiceTemplate from "../../utils/pdfTemplates/invoideTemplate.js";
+
+async function generateInvoicePdfController(req, res, next) {
+    try {
+        const { invoiceId } = req.params;
+        const { Client, invoiceNumber, invoiceDate, notes, totalTaxAmount, totalAmountAfterTax, totalAmountBeforeTax, totalQuantity, cGstPercentage, iGstPercentage, sGstPercentage, cGstAmount, iGstAmount, sGstAmount, Jobs } = await getInvoiceByIdService(invoiceId);
+        // Jobs.forEach(j => console.log(j.drawingNumber))
+        const pdfBuffer = await generatePDF(generateInvoiceTemplate(
+            Client,
+            invoiceDate,
+            invoiceNumber,
+            'MH14KL5459',
+            totalQuantity,
+            totalAmountAfterTax,
+            totalAmountBeforeTax,
+            sGstPercentage,
+            cGstPercentage,
+            iGstPercentage,
+            cGstAmount,
+            sGstAmount,
+            iGstAmount,
+            totalTaxAmount,
+            'Amount in words',
+            notes,
+            Jobs
+        ))
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename=invoice.pdf`);
+        res.send(pdfBuffer);
+    } catch (error) {
+        next(error)
+    }
+}
+
+export default generateInvoicePdfController;

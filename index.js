@@ -33,12 +33,18 @@ sequelize
     });
 
 import CLIENT from './models/clientModel.js';
+import INVOICE from './models/invoiceModel.js';
 import JOB from './models/jobModel.js';
 import MATERIAL from './models/materialModel.js';
 MATERIAL.hasMany(JOB);
 CLIENT.hasMany(JOB);
 JOB.belongsTo(CLIENT);
 JOB.belongsTo(MATERIAL);
+CLIENT.hasMany(INVOICE);
+INVOICE.belongsTo(CLIENT);
+INVOICE.hasMany(JOB);
+JOB.belongsTo(INVOICE);
+
 
 app.use(express.json());
 app.use(
@@ -58,6 +64,9 @@ app.use('/api/material', materialRoutes);
 
 import jobRoutes from './routes/jobRoutes.js';
 app.use('/api/job', jobRoutes);
+
+import invoiceRoutes from './routes/invoiceRoutes.js';
+app.use('/api/invoice', invoiceRoutes);
 
 app.get('/', (req, res) => res.send('Hello world'));
 
