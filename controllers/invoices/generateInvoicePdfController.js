@@ -1,4 +1,5 @@
 import getInvoiceByIdService from "../../services/invoices/getInvoiceByIdService.js";
+import convertAmountToWords from "../../utils/amountInWords.js";
 import generatePDF from "../../utils/generatePDF.js";
 import generateInvoiceTemplate from "../../utils/pdfTemplates/invoideTemplate.js";
 
@@ -22,12 +23,12 @@ async function generateInvoicePdfController(req, res, next) {
             sGstAmount,
             iGstAmount,
             totalTaxAmount,
-            'Amount in words',
+            convertAmountToWords(totalAmountAfterTax) + " Only",
             notes,
             Jobs
         ))
         res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename=invoice.pdf`);
+        res.setHeader('Content-Disposition', `attachment; filename=${Client.name}-invoice.pdf`);
         res.send(pdfBuffer);
     } catch (error) {
         next(error)
