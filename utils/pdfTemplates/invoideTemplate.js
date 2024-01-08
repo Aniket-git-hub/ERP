@@ -1,3 +1,5 @@
+import formatDate from "../formatDate.js";
+
 function generateInvoiceTemplate(
     client,
     invoiceDate,
@@ -105,12 +107,20 @@ function generateInvoiceTemplate(
             border-radius: 1rem;
             border: 1px solid black;
             background-color: #fff;
+            counter-reset: rowCounter;
         }
-
+        .main>table td:first-child::after {
+            counter-increment: rowCounter;
+            content: counter(rowCounter);
+        }
         .main>table tr {
             text-align: center;
             background-color: rgb(255, 255, 255);
             page-break-inside: avoid;
+        }
+
+        .main>table td:first-child {
+            width: 30px;
         }
 
         .main>table tr:nth-child(odd) {
@@ -207,9 +217,9 @@ function generateInvoiceTemplate(
             <section class="lower">
                 <section class="left">
                     <b>Billed To:</b>
-                    <p>${client.name}, ${client.address}</p>
+                    <p>${client.name ? client.name : '-'}, ${client.address ? client.address : '-'}</p>
                     <b>Customer GST No:</b>
-                    <p>${client.gst}</p>
+                    <p>${client.gst ? client.gst : '-'}</p>
                     <b>State:</b>
                     <p>27 - Maharashtra</p>
                 </section>
@@ -217,10 +227,11 @@ function generateInvoiceTemplate(
                     <table>
                         <tr>
                             <th>Invoice No:</th>
-                            <td>${invoiceNumber}</td>
+                            <td>${invoiceNumber ? invoiceNumber : '-'}</td>
                             <th>Dated:</th>
-                            <td>${invoiceDate}</td>
-                        </tr>
+                            <td>${invoiceDate ? formatDate(invoiceDate) : '-'
+        }</td >
+                        </tr >
                         <tr>
                             <th>Our Ch. No:</th>
                             <td>12</td>
@@ -241,12 +252,12 @@ function generateInvoiceTemplate(
                         </tr>
                         <tr>
                             <th colspan="2">Dispatched through:</th>
-                            <td colspan="2">${vehicleNumber}</td>
+                            <td colspan="2">${vehicleNumber ? vehicleNumber : '-'}</td>
                         </tr>
-                    </table>
-                </section>
-            </section>
-        </div>
+                    </table >
+                </section >
+            </section >
+        </div >
         <div class="main">
             <table>
                 <tr>
@@ -254,7 +265,7 @@ function generateInvoiceTemplate(
                     <th>Item</th>
                     <th>HSN</th>
                     <th>Rate</th>
-                    <th>Quantity</th>
+                    <th>Qty</th>
                     <th>Amount</th>
                 </tr> `;
     for (let i = 0; i < jobs.length; i++) {
@@ -269,40 +280,40 @@ function generateInvoiceTemplate(
     }
     html += `<tr>
                     <th colspan="4">Total</th>
-                    <td colspan="">${totalQuantity}</td>
-                    <td>${totalAmountBeforeTax}</td>
+                    <td colspan="">${totalQuantity ? totalQuantity : '-'}</td>
+                    <td>${totalAmountBeforeTax ? totalAmountAfterTax : '-'}</td>
                 </tr>
                 <tr>
                     <th colspan="4">CGST </th>
-                    <th colspan="1">${cGstPercentage} %</th>
-                    <td>${cGstAmount}</td>
+                    <th colspan="1">${cGstPercentage ? cGstPercentage : '-'} %</th>
+                    <td>${cGstAmount ? cGstAmount : '-'}</td>
                 </tr>
                 <tr>
                     <th colspan="4">SGST </th>
-                    <th colspan="1">${sGstPercentage} %</th>
-                    <td>${sGstAmount}</td>
+                    <th colspan="1">${sGstPercentage ? sGstPercentage : '-'} %</th>
+                    <td>${sGstAmount ? sGstAmount : '-'}</td>
                 </tr>
                 <tr>
                     <th colspan="4">IGST </th>
-                    <th colspan="1">${iGstPercentage} %</th>
-                    <td> ${iGstAmount} </td>
+                    <th colspan="1">${iGstPercentage ? iGstPercentage : '-'} %</th>
+                    <td> ${iGstAmount ? iGstAmount : '-'} </td>
                 </tr>
                 <tr>
                     <th colspan="5">Total Tax Amount</th>
-                    <td> ${totalTaxAmount} </td>
+                    <td> ${totalTaxAmount ? totalTaxAmount : '-'} </td>
                 </tr>
                 <tr>
                     <th colspan="5">Total Chargeable Amount</th>
-                    <td>${totalAmountAfterTax}</td>
+                    <td>${totalAmountAfterTax ? totalAmountAfterTax : '-'}</td>
                 </tr>
                 <tr>
                     <th>Rupees:</th>
-                    <td colspan="5"> ${amountInWords} </td>
+                    <td colspan="5"> ${amountInWords ? amountInWords : '-'} </td>
                 </tr>
             </table>
             <p class="note">
                 <b>Note: </b>
-                <span>${notes}</span>
+                <span>${notes ? notes : '-'}</span>
             </p>
         </div>
         <div class="footer">
@@ -326,10 +337,10 @@ function generateInvoiceTemplate(
         <div class="thankyou">
             <p>Thank you </p>
         </div>
-    </div>
-</body>
+    </div >
+</body >
 
-</html>
+</html >
     `;
 
     return html;
