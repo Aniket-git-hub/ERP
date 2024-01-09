@@ -6,7 +6,7 @@ import buildWhereClause from '../../utils/buildWhereClause.js';
 
 async function getFilteredJobsService(page = 1, limit = 10, filters = {}) {
     const offset = (page - 1) * limit;
-    const whereClause = buildWhereClause(filters, ['drawingName', 'date', 'fromDate', 'toDate', 'createdAt', 'updatedAt']);
+    const whereClause = buildWhereClause(filters, ['ClientId', 'MaterialId', 'InvoiceId', 'quantity', 'drawingName', 'date', 'fromDate', 'toDate', 'createdAt', 'updatedAt']);
 
     try {
         const items = await JOB.findAndCountAll({
