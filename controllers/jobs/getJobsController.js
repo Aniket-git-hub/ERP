@@ -11,13 +11,13 @@ async function getJobsController(req, res, next) {
         const { title, description } = generateTitleAndDescription(filters)
 
         if (pdf) {
-            const pdfBuffer = await generatePDF(generateReportTemplate(JSON.stringify(jobs.items), title, description))
+            const pdfBuffer = await generatePDF(await generateReportTemplate(JSON.stringify(jobs.items), title, description))
             res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', `attachment; filename=${title}.pdf`);
+            res.setHeader('Content-Disposition', `attachment; filename=report.pdf`);
             res.send(pdfBuffer);
-        } if (csv) {
+        } else if (csv) {
             const csvString = await generateCSV(JSON.stringify(jobs.items, null, 2))
-            res.type('text/csv');
+            res.setHeader('Content-Type', 'text/csv');
             res.attachment('jobs.csv');
             res.send(csvString);
         } else {

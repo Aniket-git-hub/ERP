@@ -40,9 +40,9 @@ function generateTitleAndDescription(filters) {
 
     if (filters.toDate) {
         title += ` to ${filters.toDate}`;
-        description += ` between the dates ${filters.fromDate} and ${filters.toDate}`;
+        description += ` and the date ${filters.toDate}`;
     }
-
+    description += `, computer generated on ${new Date().toLocaleString()}`
     return { title, description };
 }
 
