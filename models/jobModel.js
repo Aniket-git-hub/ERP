@@ -18,7 +18,7 @@ const JOB = sequelize.define('Job', {
     },
     date: {
         type: DataTypes.DATE,
-        allowNull: true,
+        allowNull: false,
     },
     imageUrl: {
         type: DataTypes.STRING,
@@ -30,7 +30,7 @@ const JOB = sequelize.define('Job', {
     },
     rate: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
     size: {
         type: DataTypes.STRING,
