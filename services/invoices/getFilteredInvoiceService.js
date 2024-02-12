@@ -20,13 +20,18 @@ async function getFilteredInvoiceService(page = 1, limit = 10, filters = {}) {
                 },
                 {
                     model: JOB,
-                    attributes: ['drawingNumber', 'rate', 'quantity']
+                    attributes: ['id']
                 }
             ]
         })
 
         const { count: totalItems, rows: itemData } = items;
         const totalPages = Math.ceil(totalItems / limit);
+
+        const jobs = itemData.map((item) => ({
+            ...item.get(),
+            Jobs: item.Jobs.map((job) => job.id)
+        }));
 
         return {
             totalItems,
@@ -35,13 +40,11 @@ async function getFilteredInvoiceService(page = 1, limit = 10, filters = {}) {
             hasNextPage: page < totalPages,
             limit,
             countIncurrentPage: itemData.length,
-            items: itemData
+            items: jobs
         }
     } catch (error) {
         throw error;
     }
-
 }
-
 
 export default getFilteredInvoiceService;

@@ -4,8 +4,8 @@ import JOB from '../../models/jobModel.js';
 import MATERIAL from '../../models/materialModel.js';
 import buildWhereClause from '../../utils/buildWhereClause.js';
 
-async function getFilteredJobsService(page = 1, limit = 10, filters = {}) {
-    const offset = (page - 1) * limit;
+async function getFilteredJobsService(page = 1, limit = null, filters = {}) {
+    const offset = (page - 1) * (limit || 10);
     const whereClause = buildWhereClause(filters, [
         'ClientId',
         'MaterialId',
@@ -27,9 +27,9 @@ async function getFilteredJobsService(page = 1, limit = 10, filters = {}) {
     try {
         const items = await JOB.findAndCountAll({
             offset,
-            limit,
+            limit: limit || undefined,
             where: whereClause,
-            order: [['createdAt', 'DESC']],
+            order: [['date', 'DESC']],
             include: [{
                 model: CLIENT,
                 attributes: [
@@ -60,7 +60,7 @@ async function getFilteredJobsService(page = 1, limit = 10, filters = {}) {
         });
 
         const { count: totalItems, rows: itemData } = items;
-        const totalPages = Math.ceil(totalItems / limit);
+        const totalPages = Math.ceil(totalItems / (limit || 10))
 
         return {
             totalItems,
