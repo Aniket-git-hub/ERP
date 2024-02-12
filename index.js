@@ -68,8 +68,11 @@ app.use('/api/job', jobRoutes);
 import invoiceRoutes from './routes/invoiceRoutes.js';
 app.use('/api/invoice', invoiceRoutes);
 
+app.get('/api/dashboard', getDashboardData)
+
 app.get('/', (req, res) => res.send('Hello world'));
 
+import getDashboardData from './controllers/dashboard/getDashboardData.js';
 import errorHandler from './middleware/errorHandler.js';
 app.use(errorHandler);
 

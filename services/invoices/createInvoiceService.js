@@ -1,11 +1,17 @@
 import INVOICE from "../../models/invoiceModel.js";
 import JOB from "../../models/jobModel.js";
 
-async function createInvoiceService(jobIds, clientId, cGstPercentage = 0, iGstPercentage = 0, sGstPercentage = 0, invoiceNumber, invoiceDate, challanNumber, PONumber, date) {
+async function createInvoiceService(jobIds, clientId, cGstPercentage = 0, iGstPercentage = 0, sGstPercentage = 0, invoiceDate, notes) {
     try {
         const jobs = await JOB.findAll({
             where: { id: jobIds, ClientId: clientId },
         });
+
+        const latestInvoice = await INVOICE.findOne({
+            order: [['createdAt', 'DESC']],
+        });
+
+        const nextInvoiceNumber = latestInvoice ? +latestInvoice.invoiceNumber + 1 : 1;
 
         let totalAmountBeforeTax = calculateTotalAmount(jobs);
         let totalQuantityBilled = calculateTotalQuantity(jobs);
@@ -19,7 +25,7 @@ async function createInvoiceService(jobIds, clientId, cGstPercentage = 0, iGstPe
         const totalAmountAfterTax = totalAmountBeforeTax + totalTaxAmount;
 
         const invoice = await INVOICE.create({
-            invoiceNumber,
+            invoiceNumber: nextInvoiceNumber,
             invoiceDate,
             totalQuantity: totalQuantityBilled,
             ClientId: clientId,
@@ -32,6 +38,7 @@ async function createInvoiceService(jobIds, clientId, cGstPercentage = 0, iGstPe
             sGstAmount,
             totalTaxAmount,
             totalAmountAfterTax,
+            notes,
         });
 
         await invoice.addJobs(jobs);
