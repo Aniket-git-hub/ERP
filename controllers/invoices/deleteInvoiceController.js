@@ -2,7 +2,7 @@ import deleteInvoiceService from "../../services/invoices/deleteInvoiceService.j
 
 async function deleteInvoiceController(req, res, next) {
     const { invoiceId } = req.params;
-    const { userId } = req.userId
+    const { userId } = req.user
     try {
         await deleteInvoiceService(userId, invoiceId);
 

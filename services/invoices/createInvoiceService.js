@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { Op, Sequelize } from "sequelize";
 import INVOICE from "../../models/invoiceModel.js";
 import JOB from "../../models/jobModel.js";
 
@@ -16,22 +16,25 @@ async function createInvoiceService(
     totalAmount
 ) {
     try {
-        let totalAmountBeforeTax = totalAmount;
-        let totalQuantityBilled = totalQuantity;
+        let totalAmountBeforeTax = +totalAmount;
+        let totalQuantityBilled = +totalQuantity;
         let jobs = [];
 
         if (jobIds && jobIds.length > 0) {
             jobs = await JOB.findAll({
                 where: { id: { [Op.in]: jobIds }, ClientId: clientId },
                 attributes: [
-                    [sequelize.fn('sum', sequelize.col('quantity')), 'totalQuantity'],
-                    [sequelize.fn('sum', sequelize.literal('quantity * rate')), 'totalAmount']
+                    [Sequelize.fn('sum', Sequelize.col('quantity')), 'totalQuantity'],
+                    [
+                        Sequelize.fn('sum', Sequelize.literal('(quantity * (millingRate + drillingRate))')),
+                        'totalAmount'
+                    ]
                 ],
                 raw: true,
             });
 
-            totalAmountBeforeTax = jobs[0].totalAmount;
-            totalQuantityBilled = jobs[0].totalQuantity;
+            totalAmountBeforeTax = parseFloat(jobs[0].totalAmount);
+            totalQuantityBilled = parseInt(jobs[0].totalQuantity);
         }
 
         const invoice = await INVOICE.create({
