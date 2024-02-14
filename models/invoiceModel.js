@@ -96,10 +96,10 @@ const INVOICE = sequelize.define('Invoice', {
             }
 
             if (invoice.invoiceType === 'taxed') {
-                const totalAmountBeforeTax = invoice.totalAmountBeforeTax || 0;
-                const cGstPercentage = invoice.cGstPercentage || 0;
-                const iGstPercentage = invoice.iGstPercentage || 0;
-                const sGstPercentage = invoice.sGstPercentage || 0;
+                const totalAmountBeforeTax = +invoice.totalAmountBeforeTax || 0;
+                const cGstPercentage = +invoice.cGstPercentage || 0;
+                const iGstPercentage = +invoice.iGstPercentage || 0;
+                const sGstPercentage = +invoice.sGstPercentage || 0;
 
                 invoice.cGstAmount = (totalAmountBeforeTax * cGstPercentage) / 100;
                 invoice.iGstAmount = (totalAmountBeforeTax * iGstPercentage) / 100;
