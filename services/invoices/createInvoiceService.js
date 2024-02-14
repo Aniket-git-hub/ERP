@@ -49,8 +49,7 @@ async function createInvoiceService(
             totalAmountBeforeTax,
             notes,
         });
-
-        await invoice.addJobs(jobs);
+        await invoice.addJobs(jobIds);
 
         return invoice;
     } catch (error) {
