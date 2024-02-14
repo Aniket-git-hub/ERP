@@ -1,9 +1,9 @@
 import CLIENT from '../../models/clientModel.js';
 import CustomError from '../../utils/createError.js';
-async function updateClientService(clientId, clientData) {
+async function updateClientService(userId, clientId, clientData) {
     try {
         const updatedClient = await CLIENT.update(clientData, {
-            where: { id: clientId },
+            where: { id: clientId, UserId: userId },
             returning: true,
             plain: true,
         });

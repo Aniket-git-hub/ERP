@@ -36,6 +36,8 @@ import CLIENT from './models/clientModel.js';
 import INVOICE from './models/invoiceModel.js';
 import JOB from './models/jobModel.js';
 import MATERIAL from './models/materialModel.js';
+import USER from './models/userModel.js';
+
 MATERIAL.hasMany(JOB);
 CLIENT.hasMany(JOB);
 JOB.belongsTo(CLIENT);
@@ -44,6 +46,14 @@ CLIENT.hasMany(INVOICE);
 INVOICE.belongsTo(CLIENT);
 INVOICE.hasMany(JOB);
 JOB.belongsTo(INVOICE);
+USER.hasMany(JOB)
+USER.hasMany(CLIENT)
+USER.hasMany(MATERIAL)
+USER.hasMany(INVOICE)
+JOB.belongsTo(USER)
+INVOICE.belongsTo(USER)
+MATERIAL.belongsTo(USER)
+CLIENT.belongsTo(USER)
 
 
 app.use(express.json());

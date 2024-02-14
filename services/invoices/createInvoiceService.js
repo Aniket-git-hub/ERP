@@ -1,43 +1,49 @@
+import { Op } from "sequelize";
 import INVOICE from "../../models/invoiceModel.js";
 import JOB from "../../models/jobModel.js";
 
-async function createInvoiceService(jobIds, clientId, cGstPercentage = 0, iGstPercentage = 0, sGstPercentage = 0, invoiceDate, notes) {
+async function createInvoiceService(
+    jobIds,
+    userId,
+    clientId,
+    invoiceType,
+    invoiceDate,
+    cGstPercentage,
+    iGstPercentage,
+    sGstPercentage,
+    notes,
+    totalQuantity,
+    totalAmount
+) {
     try {
-        const jobs = await JOB.findAll({
-            where: { id: jobIds, ClientId: clientId },
-        });
+        let totalAmountBeforeTax = totalAmount;
+        let totalQuantityBilled = totalQuantity;
+        let jobs = [];
 
-        const latestInvoice = await INVOICE.findOne({
-            order: [['createdAt', 'DESC']],
-        });
+        if (jobIds && jobIds.length > 0) {
+            jobs = await JOB.findAll({
+                where: { id: { [Op.in]: jobIds }, ClientId: clientId },
+                attributes: [
+                    [sequelize.fn('sum', sequelize.col('quantity')), 'totalQuantity'],
+                    [sequelize.fn('sum', sequelize.literal('quantity * rate')), 'totalAmount']
+                ],
+                raw: true,
+            });
 
-        const nextInvoiceNumber = latestInvoice ? +latestInvoice.invoiceNumber + 1 : 1;
-
-        let totalAmountBeforeTax = calculateTotalAmount(jobs);
-        let totalQuantityBilled = calculateTotalQuantity(jobs);
-
-        const cGstAmount = calculateTaxAmount(totalAmountBeforeTax, cGstPercentage);
-        const iGstAmount = calculateTaxAmount(totalAmountBeforeTax, iGstPercentage);
-        const sGstAmount = calculateTaxAmount(totalAmountBeforeTax, sGstPercentage);
-
-        const totalTaxAmount = cGstAmount + iGstAmount + sGstAmount;
-
-        const totalAmountAfterTax = totalAmountBeforeTax + totalTaxAmount;
+            totalAmountBeforeTax = jobs[0].totalAmount;
+            totalQuantityBilled = jobs[0].totalQuantity;
+        }
 
         const invoice = await INVOICE.create({
-            invoiceNumber: nextInvoiceNumber,
+            invoiceType,
             invoiceDate,
             totalQuantity: totalQuantityBilled,
             ClientId: clientId,
+            UserId: userId,
             cGstPercentage,
             iGstPercentage,
             sGstPercentage,
             totalAmountBeforeTax,
-            cGstAmount,
-            iGstAmount,
-            sGstAmount,
-            totalTaxAmount,
-            totalAmountAfterTax,
             notes,
         });
 
@@ -45,20 +51,8 @@ async function createInvoiceService(jobIds, clientId, cGstPercentage = 0, iGstPe
 
         return invoice;
     } catch (error) {
-        throw error;
+        throw error
     }
-}
-
-function calculateTotalQuantity(jobs) {
-    return jobs.reduce((total, job) => total + job.quantity, 0);
-}
-
-function calculateTotalAmount(jobs) {
-    return jobs.reduce((total, job) => total + job.quantity * job.rate, 0);
-}
-
-function calculateTaxAmount(amount, percentage) {
-    return (amount * percentage) / 100;
 }
 
 export default createInvoiceService;

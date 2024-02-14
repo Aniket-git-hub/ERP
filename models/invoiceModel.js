@@ -9,7 +9,7 @@ const INVOICE = sequelize.define('Invoice', {
         allowNull: false,
     },
     invoiceNumber: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     invoiceDate: {
@@ -56,6 +56,16 @@ const INVOICE = sequelize.define('Invoice', {
         type: DataTypes.FLOAT,
         allowNull: true,
     },
+    invoiceType: {
+        type: DataTypes.ENUM('taxed', 'simple'),
+        allowNull: false,
+        defaultValue: 'taxed',
+    },
+    isPaid: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
     notes: {
         type: DataTypes.TEXT,
         allowNull: true,
@@ -70,6 +80,37 @@ const INVOICE = sequelize.define('Invoice', {
         defaultValue: DataTypes.NOW,
         allowNull: false
     }
+}, {
+    hooks: {
+        beforeValidate: async (invoice) => {
+            if (!invoice.invoiceNumber) {
+                const latestInvoice = await INVOICE.findOne({
+                    order: [['createdAt', 'DESC']],
+                    where: {
+                        invoiceType: invoice.invoiceType,
+                    },
+                });
+
+                const lastInvoiceNumber = latestInvoice ? latestInvoice.invoiceNumber : 0;
+                invoice.invoiceNumber = lastInvoiceNumber + 1;
+            }
+
+            if (invoice.invoiceType === 'taxed') {
+                const totalAmountBeforeTax = invoice.totalAmountBeforeTax || 0;
+                const cGstPercentage = invoice.cGstPercentage || 0;
+                const iGstPercentage = invoice.iGstPercentage || 0;
+                const sGstPercentage = invoice.sGstPercentage || 0;
+
+                invoice.cGstAmount = (totalAmountBeforeTax * cGstPercentage) / 100;
+                invoice.iGstAmount = (totalAmountBeforeTax * iGstPercentage) / 100;
+                invoice.sGstAmount = (totalAmountBeforeTax * sGstPercentage) / 100;
+
+                invoice.totalTaxAmount = invoice.cGstAmount + invoice.iGstAmount + invoice.sGstAmount;
+
+                invoice.totalAmountAfterTax = totalAmountBeforeTax + invoice.totalTaxAmount;
+            }
+        },
+    },
 });
 
 

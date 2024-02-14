@@ -1,10 +1,11 @@
 import updateInvoiceService from "../../services/invoices/updateInvoiceService.js";
 
 async function updateInvoiceController(req, res, next) {
+    const { invoiceId } = req.params;
+    const updatedFields = req.body;
+    const { userId } = req.user
     try {
-        const { invoiceId } = req.params;
-        const updatedFields = req.body;
-        await updateInvoiceService(invoiceId, updatedFields);
+        await updateInvoiceService(userId, invoiceId, updatedFields);
         res.json({
             message: ' Invoice updated successfully',
             success: true,

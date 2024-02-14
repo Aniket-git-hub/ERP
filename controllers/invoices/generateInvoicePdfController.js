@@ -4,9 +4,10 @@ import generatePDF from "../../utils/generatePDF.js";
 import generateInvoiceTemplate from "../../utils/pdfTemplates/invoideTemplate.js";
 
 async function generateInvoicePdfController(req, res, next) {
+    const { invoiceId } = req.params;
+    const { userId } = req.user
     try {
-        const { invoiceId } = req.params;
-        const { Client, invoiceNumber, invoiceDate, notes, totalTaxAmount, totalAmountAfterTax, totalAmountBeforeTax, totalQuantity, cGstPercentage, iGstPercentage, sGstPercentage, cGstAmount, iGstAmount, sGstAmount, Jobs } = await getInvoiceByIdService(invoiceId);
+        const { Client, invoiceNumber, invoiceDate, notes, totalTaxAmount, totalAmountAfterTax, totalAmountBeforeTax, totalQuantity, cGstPercentage, iGstPercentage, sGstPercentage, cGstAmount, iGstAmount, sGstAmount, Jobs } = await getInvoiceByIdService(userId, invoiceId);
         // Jobs.forEach(j => console.log(j.drawingNumber))
         const pdfBuffer = await generatePDF(generateInvoiceTemplate(
             Client,

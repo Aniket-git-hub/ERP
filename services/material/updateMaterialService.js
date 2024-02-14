@@ -1,12 +1,12 @@
 import MATERIAL from '../../models/materialModel.js';
 import CustomError from '../../utils/createError.js';
 
-async function updateMaterialService(materialId, name, hardness, density) {
+async function updateMaterialService(userId, materialId, name, hardness, density) {
     try {
         const updatedMaterial = await MATERIAL.update(
             { name, hardness, density },
             {
-                where: { id: materialId },
+                where: { id: materialId, UserId: userId },
                 returning: true,
                 plain: true,
             }

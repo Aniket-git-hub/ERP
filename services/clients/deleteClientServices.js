@@ -1,9 +1,9 @@
 import CLIENT from '../../models/clientModel.js';
 import CustomError from "../../utils/createError.js";
-async function deleteClientsService(clientId) {
+async function deleteClientsService(userId, clientId) {
     try {
         const deletedClient = await CLIENT.destroy({
-            where: { id: clientId },
+            where: { id: clientId, UserId: userId },
         });
         if (!deletedClient) {
             throw new CustomError("ClientError", "Client not found")

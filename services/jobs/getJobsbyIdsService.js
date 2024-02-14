@@ -1,10 +1,11 @@
 import JOB from '../../models/jobModel.js';
 
-async function getJobByIdsService(jobs) {
+async function getJobByIdsService(userId, jobs) {
     try {
         const job = await JOB.findAll({
             where: {
-                id: jobs
+                id: jobs,
+                UserId: userId
             }
         })
         return job

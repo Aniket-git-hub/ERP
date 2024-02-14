@@ -5,9 +5,11 @@ import generateTitleAndDescription from "../../utils/pdfTemplates/generateTitleA
 import generateReportTemplate from "../../utils/pdfTemplates/reportTemplate.js";
 async function getJobsController(req, res, next) {
     const { page = 1, limit = 10, pdf, csv } = req.query;
+    const { userId } = req.user;
     const filters = req.query;
     try {
-        const jobs = await getFilteredJobsService(parseInt(page), parseInt(limit), filters);
+        const jobs = await getFilteredJobsService(userId, parseInt(page), parseInt(limit), filters);
+
         const { title, description } = generateTitleAndDescription(filters)
 
         if (pdf) {

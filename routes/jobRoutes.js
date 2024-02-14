@@ -5,14 +5,15 @@ import getJobByIdController from '../controllers/jobs/getJobByIdController.js';
 import getJobsByIdsController from '../controllers/jobs/getJobsByIdsController.js';
 import getJobController from '../controllers/jobs/getJobsController.js';
 import updateJobController from '../controllers/jobs/updateJobsController.js';
+import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
-router.get('/id/:jobId', getJobByIdController);
-router.get('/', getJobController);
-router.get('/ids', getJobsByIdsController);
-router.post('/', addJobController);
-router.put('/:jobId', updateJobController);
-router.delete('/:jobId', deleteJobController);
+router.get('/id/:jobId', verifyJWT, getJobByIdController);
+router.get('/', verifyJWT, getJobController);
+router.get('/ids', verifyJWT, getJobsByIdsController);
+router.post('/', verifyJWT, addJobController);
+router.put('/:jobId', verifyJWT, updateJobController);
+router.delete('/:jobId', verifyJWT, deleteJobController);
 
 export default router;

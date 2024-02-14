@@ -4,7 +4,7 @@ import JOB from '../../models/jobModel.js';
 import MATERIAL from '../../models/materialModel.js';
 import buildWhereClause from '../../utils/buildWhereClause.js';
 
-async function getFilteredJobsService(page = 1, limit = null, filters = {}) {
+async function getFilteredJobsService(userId, page = 1, limit = null, filters = {}) {
     const offset = (page - 1) * (limit || 10);
     const whereClause = buildWhereClause(filters, [
         'ClientId',
@@ -28,7 +28,10 @@ async function getFilteredJobsService(page = 1, limit = null, filters = {}) {
         const items = await JOB.findAndCountAll({
             offset,
             limit: limit || undefined,
-            where: whereClause,
+            where: {
+                UserId: userId,
+                ...whereClause
+            },
             order: [['date', 'DESC']],
             include: [{
                 model: CLIENT,
@@ -51,7 +54,7 @@ async function getFilteredJobsService(page = 1, limit = null, filters = {}) {
                         'qty'
                     ],
                     [
-                        Sequelize.literal('`Job`.`quantity` * `Job`.`rate`'),
+                        Sequelize.literal('`Job`.`quantity` * (`Job`.`millingRate` + `Job`.`drillingRate`)'),
                         'total'
                     ],
                 ],
