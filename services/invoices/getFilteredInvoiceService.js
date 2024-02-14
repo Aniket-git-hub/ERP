@@ -3,7 +3,7 @@ import INVOICE from "../../models/invoiceModel.js";
 import JOB from "../../models/jobModel.js";
 import buildWhereClause from "../../utils/buildWhereClause.js";
 
-async function getFilteredInvoiceService(page = 1, limit = 10, filters = {}) {
+async function getFilteredInvoiceService(userId, page = 1, limit = 10, filters = {}) {
     const offset = (page - 1) * limit;
     const whereClause = buildWhereClause(filters, ['invoiceDate', 'fromDate', 'toDate', 'invoiceNumber', 'ClientId'])
 
@@ -11,7 +11,7 @@ async function getFilteredInvoiceService(page = 1, limit = 10, filters = {}) {
         const items = await INVOICE.findAndCountAll({
             offset,
             limit,
-            where: whereClause,
+            where: { UserId: userId, ...whereClause },
             order: [['createdAt', 'DESC']],
             include: [
                 {

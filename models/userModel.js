@@ -45,6 +45,20 @@ const USER = sequelize.define('User', {
             len: [10, 11]
         }
     },
+    companyName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: [1, 30]
+        }
+    },
+    address: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: [0, 500]
+        }
+    },
     createdAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,

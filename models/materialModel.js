@@ -21,6 +21,7 @@ const MATERIAL = sequelize.define('Material', {
         type: DataTypes.FLOAT,
         allowNull: true,
     },
+
     createdAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,

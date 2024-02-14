@@ -1,9 +1,9 @@
 import JOB from '../../models/jobModel.js';
 import CustomError from '../../utils/createError.js';
-async function deleteJobService(jobId) {
+async function deleteJobService(userId, jobId) {
     try {
         const deletedJob = await JOB.destroy({
-            where: { id: jobId },
+            where: { id: jobId, UserId: userId },
         });
 
         if (!deletedJob) {

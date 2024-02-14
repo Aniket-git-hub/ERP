@@ -1,11 +1,10 @@
 import getFilteredInvoicesService from '../../services/invoices/getFilteredInvoiceService.js';
 
 async function getFilteredInvoiceController(req, res, next) {
+    const { page, limit, filters } = req.query;
+    const { userId } = req.user
     try {
-        const { page, limit, filters } = req.query;
-
-        const result = await getFilteredInvoicesService(page, limit, filters);
-
+        const result = await getFilteredInvoicesService(userId, page, limit, filters);
         res.send(result)
     } catch (error) {
         next(error)

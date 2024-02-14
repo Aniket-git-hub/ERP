@@ -5,14 +5,15 @@ import generateInvoicePdfController from '../controllers/invoices/generateInvoic
 import getFilteredInvoiceController from '../controllers/invoices/getFilteredInvoiceController.js';
 import getInvoiceByIdController from '../controllers/invoices/getInvoiceByIdController.js';
 import updateInvoiceController from '../controllers/invoices/updateInvoiceController.js';
+import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
-router.get('/:invoiceId', getInvoiceByIdController);
-router.get('/', getFilteredInvoiceController);
-router.get('/generatePdf/:invoiceId', generateInvoicePdfController);
-router.post('/', createInvoiceController);
-router.put('/:invoiceId', updateInvoiceController);
-router.delete('/:invoiceId', deleteInvoiceController);
+router.get('/:invoiceId', verifyJWT, getInvoiceByIdController);
+router.get('/', verifyJWT, getFilteredInvoiceController);
+router.get('/generatePdf/:invoiceId', verifyJWT, generateInvoicePdfController);
+router.post('/', verifyJWT, createInvoiceController);
+router.put('/:invoiceId', verifyJWT, updateInvoiceController);
+router.delete('/:invoiceId', verifyJWT, deleteInvoiceController);
 
 export default router;

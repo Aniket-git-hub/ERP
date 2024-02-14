@@ -1,13 +1,14 @@
 import JOB from '../../models/jobModel.js';
 import CustomError from "../../utils/createError.js";
-async function updateJobService(jobId, drawingNumber, description, quantity, rate, date, size, clientId, materialId, imageUrl) {
+async function updateJobService(jobId, userId, drawingNumber, description, quantity, millingRate, drillingRate, date, size, clientId, materialId, imageUrl) {
     try {
         const updatedJob = await JOB.update(
             {
                 drawingNumber,
                 description,
                 quantity,
-                rate,
+                millingRate,
+                drillingRate,
                 date,
                 size,
                 ClientId: clientId,
@@ -15,7 +16,7 @@ async function updateJobService(jobId, drawingNumber, description, quantity, rat
                 imageUrl,
             },
             {
-                where: { id: jobId },
+                where: { id: jobId, UserId: userId },
                 returning: true,
                 plain: true,
             }

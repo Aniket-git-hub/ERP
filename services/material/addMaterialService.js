@@ -1,7 +1,7 @@
 import MATERIAL from '../../models/materialModel.js';
-async function addMaterialService(name, hardness, density) {
+async function addMaterialService(userId, name, hardness, density) {
     try {
-        const client = await MATERIAL.create({ name, hardness, density })
+        const client = await MATERIAL.create({ UserId: userId, name, hardness, density })
         return client
     } catch (err) {
         throw err

@@ -28,13 +28,32 @@ const JOB = sequelize.define('Job', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    rate: {
+    millingRate: {
         type: DataTypes.INTEGER,
         allowNull: true,
+    },
+    drillingRate: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    rate: {
+        type: DataTypes.VIRTUAL,
+        get() {
+            return this.millingRate + this.drillingRate
+        },
+        set(value) {
+            throw new Error('Do not try to set the `rate` value!');
+        }
     },
     size: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    operations: {
+        type: DataTypes.ENUM,
+        values: ['milling', 'drilling', 'both'],
+        allowNull: false,
+        defaultValue: 'milling',
     },
     createdAt: {
         type: DataTypes.DATE,

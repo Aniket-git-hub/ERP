@@ -1,10 +1,10 @@
 import INVOICE from '../../models/invoiceModel.js';
 import CustomError from "../../utils/createError.js";
 
-async function updateInvoiceService(invoiceId, updatedFields) {
+async function updateInvoiceService(userId, invoiceId, updatedFields) {
     try {
         const updatedInvoice = await INVOICE.update(updatedFields, {
-            where: { id: invoiceId },
+            where: { id: invoiceId, UserId: userId },
             returning: true,
             plain: true,
         });

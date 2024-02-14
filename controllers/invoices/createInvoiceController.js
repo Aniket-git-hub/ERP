@@ -1,9 +1,32 @@
 import createInvoiceService from "../../services/invoices/createInvoiceService.js";
 
 async function createInvoiceController(req, res, next) {
-    const { jobIds, clientId, cGst, iGst, sGst, invoiceNumber, invoiceDate, notes } = req.body;
+    const {
+        jobIds,
+        clientId,
+        invoiceType,
+        invoiceDate,
+        cGst,
+        iGst,
+        sGst,
+        notes,
+        totalQuantity,
+        totalAmount } = req.body;
+    const { userId } = req.user
     try {
-        const invoice = await createInvoiceService(jobIds, clientId, cGst, iGst, sGst, invoiceDate, notes,);
+        const invoice = await createInvoiceService(
+            jobIds,
+            userId,
+            clientId,
+            invoiceType,
+            invoiceDate,
+            cGst,
+            iGst,
+            sGst,
+            notes,
+            totalQuantity,
+            totalAmount
+        );
         res.status(201).json({
             invoice,
             message: 'Invoice created successfully',
