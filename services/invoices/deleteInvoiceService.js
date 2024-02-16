@@ -1,4 +1,4 @@
-import INVOICE from "../../models/invoiceModel.js";
+import INVOICE from "../../models/work/invoiceModel.js";
 import CustomError from "../../utils/createError.js";
 
 async function deleteInvoiceService(userId, invoiceId) {

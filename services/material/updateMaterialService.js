@@ -1,4 +1,4 @@
-import MATERIAL from '../../models/materialModel.js';
+import MATERIAL from '../../models/work/materialModel.js';
 import CustomError from '../../utils/createError.js';
 
 async function updateMaterialService(userId, materialId, name, hardness, density) {

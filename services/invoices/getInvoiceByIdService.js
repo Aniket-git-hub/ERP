@@ -1,6 +1,6 @@
-import CLIENT from "../../models/clientModel.js";
-import INVOICE from "../../models/invoiceModel.js";
-import JOB from "../../models/jobModel.js";
+import CLIENT from "../../models/work/clientModel.js";
+import INVOICE from "../../models/work/invoiceModel.js";
+import JOB from "../../models/work/jobModel.js";
 import CustomError from "../../utils/createError.js";
 
 async function getInvoiceByIdService(userId, invoiceId) {

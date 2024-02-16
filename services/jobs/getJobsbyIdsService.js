@@ -1,4 +1,4 @@
-import JOB from '../../models/jobModel.js';
+import JOB from '../../models/work/jobModel.js';
 
 async function getJobByIdsService(userId, jobs) {
     try {

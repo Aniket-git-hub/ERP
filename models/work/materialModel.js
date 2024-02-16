@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import sequelize from '../../config/database.js';
 
 const MATERIAL = sequelize.define('Material', {
     id: {
@@ -21,17 +21,6 @@ const MATERIAL = sequelize.define('Material', {
         type: DataTypes.FLOAT,
         allowNull: true,
     },
-
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    }
 });
 
 

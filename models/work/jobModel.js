@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import sequelize from '../../config/database.js';
 
 const JOB = sequelize.define('Job', {
     id: {
@@ -50,20 +50,9 @@ const JOB = sequelize.define('Job', {
         allowNull: true,
     },
     operations: {
-        type: DataTypes.ENUM,
-        values: ['milling', 'drilling', 'both'],
+        type: DataTypes.ENUM('milling', 'drilling', 'both'),
         allowNull: false,
         defaultValue: 'milling',
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
     },
 });
 

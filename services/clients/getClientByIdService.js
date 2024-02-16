@@ -1,4 +1,4 @@
-import CLIENT from '../../models/clientModel.js';
+import CLIENT from '../../models/work/clientModel.js';
 
 async function getClientByIdService(clientId) {
     try {

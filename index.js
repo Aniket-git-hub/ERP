@@ -22,39 +22,8 @@ app.use(
 );
 app.use(cors());
 
-import sequelize from './config/database.js';
-sequelize
-    .sync({ force: false })
-    .then(() => {
-        console.log('[database] synced successfully');
-    })
-    .catch((error) => {
-        console.error('[database] Error syncing database:', error);
-    });
-
-import CLIENT from './models/clientModel.js';
-import INVOICE from './models/invoiceModel.js';
-import JOB from './models/jobModel.js';
-import MATERIAL from './models/materialModel.js';
-import USER from './models/userModel.js';
-
-MATERIAL.hasMany(JOB);
-CLIENT.hasMany(JOB);
-JOB.belongsTo(CLIENT);
-JOB.belongsTo(MATERIAL);
-CLIENT.hasMany(INVOICE);
-INVOICE.belongsTo(CLIENT);
-INVOICE.hasMany(JOB);
-JOB.belongsTo(INVOICE);
-USER.hasMany(JOB)
-USER.hasMany(CLIENT)
-USER.hasMany(MATERIAL)
-USER.hasMany(INVOICE)
-JOB.belongsTo(USER)
-INVOICE.belongsTo(USER)
-MATERIAL.belongsTo(USER)
-CLIENT.belongsTo(USER)
-
+// syncing the db
+syncDatabase();
 
 app.use(express.json());
 app.use(
@@ -75,6 +44,7 @@ app.use('/api/material', materialRoutes);
 import jobRoutes from './routes/jobRoutes.js';
 app.use('/api/job', jobRoutes);
 
+import getDashboardData from './controllers/dashboard/getDashboardData.js';
 import invoiceRoutes from './routes/invoiceRoutes.js';
 app.use('/api/invoice', invoiceRoutes);
 
@@ -82,7 +52,7 @@ app.get('/api/dashboard', getDashboardData)
 
 app.get('/', (req, res) => res.send('Hello world'));
 
-import getDashboardData from './controllers/dashboard/getDashboardData.js';
+import syncDatabase from './dbInitializations.js';
 import errorHandler from './middleware/errorHandler.js';
 app.use(errorHandler);
 

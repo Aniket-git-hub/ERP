@@ -1,4 +1,4 @@
-import CLIENT from '../../models/clientModel.js';
+import CLIENT from '../../models/work/clientModel.js';
 import buildWhereClause from '../../utils/buildWhereClause.js';
 
 async function getFilteredClientsService(page = 1, limit = 10, filters = {}) {

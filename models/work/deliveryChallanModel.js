@@ -1,8 +1,7 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-import CLIENT from './clientModel.js';
+import sequelize from '../../config/database.js';
 
-const DELIVERY_CHALLAN = sequelize.define('DeliveryChallan', {
+const DELIVERY_CHALLAN = sequelize.define('delivery_challan', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -29,19 +28,6 @@ const DELIVERY_CHALLAN = sequelize.define('DeliveryChallan', {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    }
 });
-
-DELIVERY_CHALLAN.belongsToMany(CLIENT)
-CLIENT.hasMany(DELIVERY_CHALLAN)
 
 export default DELIVERY_CHALLAN;

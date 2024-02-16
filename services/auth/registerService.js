@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import USER from '../../models/userModel.js';
+import USER from '../../models/work/userModel.js';
 
 async function registerUser(
     firstName,
