@@ -1,4 +1,4 @@
-import CLIENT from '../../models/clientModel.js';
+import CLIENT from '../../models/work/clientModel.js';
 import CustomError from "../../utils/createError.js";
 async function deleteClientsService(userId, clientId) {
     try {

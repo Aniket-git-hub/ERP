@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import USER from '../../models/userModel.js';
+import USER from '../../models/work/userModel.js';
 import CustomError from '../../utils/createError.js';
 
 async function loginUser(email, password) {

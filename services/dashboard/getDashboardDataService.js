@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
-import INVOICE from "../../models/invoiceModel.js";
-import JOB from "../../models/jobModel.js";
+import INVOICE from "../../models/work/invoiceModel.js";
+import JOB from "../../models/work/jobModel.js";
 import getCurrentMonthDates from "../../utils/getCurrentMonthDate.js";
 
 

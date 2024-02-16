@@ -1,4 +1,4 @@
-import JOB from '../../models/jobModel.js';
+import JOB from '../../models/work/jobModel.js';
 import CustomError from '../../utils/createError.js';
 async function deleteJobService(userId, jobId) {
     try {

@@ -1,4 +1,4 @@
-import JOB from '../../models/jobModel.js';
+import JOB from '../../models/work/jobModel.js';
 async function addJobService(userId, drawingNumber, description, quantity, millingRate, drillingRate, date, size, clientId, materialId, imageUrl) {
     try {
         const job = await JOB.create({

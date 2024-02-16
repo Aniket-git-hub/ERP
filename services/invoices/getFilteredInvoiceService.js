@@ -1,6 +1,6 @@
-import CLIENT from "../../models/clientModel.js";
-import INVOICE from "../../models/invoiceModel.js";
-import JOB from "../../models/jobModel.js";
+import CLIENT from "../../models/work/clientModel.js";
+import INVOICE from "../../models/work/invoiceModel.js";
+import JOB from "../../models/work/jobModel.js";
 import buildWhereClause from "../../utils/buildWhereClause.js";
 
 async function getFilteredInvoiceService(userId, page = 1, limit = 10, filters = {}) {

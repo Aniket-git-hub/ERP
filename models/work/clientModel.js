@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import sequelize from '../../config/database.js';
 
 const CLIENT = sequelize.define('Client', {
     id: {
@@ -31,16 +31,6 @@ const CLIENT = sequelize.define('Client', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    }
 });
 
 

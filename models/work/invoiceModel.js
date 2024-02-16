@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import sequelize from '../../config/database.js';
 
 const INVOICE = sequelize.define('Invoice', {
     id: {
@@ -61,7 +61,7 @@ const INVOICE = sequelize.define('Invoice', {
         allowNull: false,
         defaultValue: 'taxed',
     },
-    isPaid: {
+    paymentReceived: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
@@ -70,16 +70,6 @@ const INVOICE = sequelize.define('Invoice', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    }
 }, {
     hooks: {
         beforeValidate: async (invoice) => {

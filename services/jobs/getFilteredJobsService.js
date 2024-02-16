@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
-import CLIENT from '../../models/clientModel.js';
-import JOB from '../../models/jobModel.js';
-import MATERIAL from '../../models/materialModel.js';
+import CLIENT from '../../models/work/clientModel.js';
+import JOB from '../../models/work/jobModel.js';
+import MATERIAL from '../../models/work/materialModel.js';
 import buildWhereClause from '../../utils/buildWhereClause.js';
 
 async function getFilteredJobsService(userId, page = 1, limit = null, filters = {}) {
