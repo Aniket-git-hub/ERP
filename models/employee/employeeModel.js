@@ -51,7 +51,7 @@ const EMPLOYEE = sequelize.define('employee', {
         allowNull: false,
     },
     department: {
-        type: DataTypes.ENUM('finance', 'factory'),
+        type: DataTypes.ENUM('finance', 'factory', 'management'),
         allowNull: false,
     },
     salary: {
@@ -62,6 +62,10 @@ const EMPLOYEE = sequelize.define('employee', {
         type: DataTypes.DATE,
         allowNull: false,
     },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    }
 });
 
 export default EMPLOYEE;

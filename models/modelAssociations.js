@@ -16,7 +16,7 @@ import JOB from './work/jobModel.js';
 import MATERIAL from './work/materialModel.js';
 import USER from './work/userModel.js';
 
-export default function setupAssociations() {
+function setupAssociations() {
     // work
     USER.hasMany(JOB)
     USER.hasMany(CLIENT)
@@ -83,3 +83,5 @@ export default function setupAssociations() {
     INVOICE.hasOne(INCOME)
     INCOME.belongsTo(INVOICE)
 }
+
+export default setupAssociations;
