@@ -44,10 +44,13 @@ app.use('/api/material', materialRoutes);
 import jobRoutes from './routes/jobRoutes.js';
 app.use('/api/job', jobRoutes);
 
-import getDashboardData from './controllers/dashboard/getDashboardData.js';
 import invoiceRoutes from './routes/invoiceRoutes.js';
 app.use('/api/invoice', invoiceRoutes);
 
+import employeeRoutes from './routes/employeeRoutes.js';
+app.use('/api/employee', employeeRoutes)
+
+import getDashboardData from './controllers/dashboard/getDashboardData.js';
 app.get('/api/dashboard', getDashboardData)
 
 app.get('/', (req, res) => res.send('Hello world'));

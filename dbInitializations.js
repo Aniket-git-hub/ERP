@@ -1,8 +1,7 @@
 import sequelize from "./config/database.js";
 import setupAssociations from "./models/modelAssociations.js";
 
-
-export default function syncDatabase() {
+function syncDatabase() {
     setupAssociations();
     return sequelize
         .sync({ force: false })
@@ -13,3 +12,5 @@ export default function syncDatabase() {
             console.error('[database] Error syncing database:', error);
         });
 }
+
+export default syncDatabase;
