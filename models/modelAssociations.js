@@ -61,6 +61,8 @@ function setupAssociations() {
     DEDUCTION.belongsTo(EMPLOYEE)
     ADVANCE.hasMany(DEDUCTION)
     DEDUCTION.belongsTo(ADVANCE)
+    PAYMENT_RECEIPT.hasMany(ATTENDANCE)
+    ATTENDANCE.belongsTo(PAYMENT_RECEIPT)
 
     // budget
     USER.hasMany(BUDGET)

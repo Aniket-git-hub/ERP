@@ -33,7 +33,7 @@ const PAYMENT_RECEIPT = sequelize.define('payment_receipt', {
         allowNull: false,
     },
     modeOfPayment: {
-        type: DataTypes.ENUM("OnlinePayment", "Cash", "Cheque"),
+        type: DataTypes.ENUM("Online", "Cash", "Cheque"),
         allowNull: false,
         defaultValue: "Cash"
     },
