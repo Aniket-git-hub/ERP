@@ -8,6 +8,10 @@ const SCRAP_SELL = sequelize.define('scrap_sell', {
         primaryKey: true,
         allowNull: false
     },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
     weight: {
         type: DataTypes.INTEGER,
         allowNull: false,

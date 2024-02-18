@@ -66,8 +66,6 @@ function setupAssociations() {
     EXPENSE.belongsTo(USER)
     USER.hasMany(INCOME)
     INCOME.belongsTo(USER)
-    USER.hasMany(SCRAP_SELL)
-    SCRAP_SELL.belongsTo(USER)
     USER.hasMany(TRANSACTIONS)
     TRANSACTIONS.belongsTo(USER)
     EXPENSE_CATEGORY.hasMany(BUDGET)
@@ -78,10 +76,16 @@ function setupAssociations() {
     TRANSACTIONS.belongsTo(INCOME)
     EXPENSE.hasOne(TRANSACTIONS)
     TRANSACTIONS.belongsTo(EXPENSE)
-    SCRAP_SELL.hasOne(INCOME)
-    INCOME.belongsTo(SCRAP_SELL)
     INVOICE.hasOne(INCOME)
     INCOME.belongsTo(INVOICE)
+
+    // scrap sell associations
+    USER.hasMany(SCRAP_SELL)
+    INCOME.belongsTo(SCRAP_SELL)
+    // INCOME.hasMany(SCRAP_SELL)
+    SCRAP_SELL.hasOne(INCOME)
+    SCRAP_SELL.belongsTo(USER)
+    // SCRAP_SELL.belongsTo(INCOME)
 }
 
 export default setupAssociations;

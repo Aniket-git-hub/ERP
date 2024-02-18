@@ -53,6 +53,12 @@ app.use('/api/employee', employeeRoutes)
 import attendanceRoutes from "./routes/attendanceRoute.js";
 app.use('/api/attendance', attendanceRoutes)
 
+import advanceRoutes from "./routes/advanceRoutes.js";
+app.use('/api/advance', advanceRoutes)
+
+import scrapSellRoutes from './routes/scrapSellRoutes.js';
+app.use('/api/scrap-sell', scrapSellRoutes)
+
 import getDashboardData from './controllers/dashboard/getDashboardData.js';
 app.get('/api/dashboard', getDashboardData)
 
