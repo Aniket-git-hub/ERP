@@ -8,6 +8,10 @@ const DEDUCTION = sequelize.define('deduction', {
         primaryKey: true,
         allowNull: false
     },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
     amountDeducted: {
         type: DataTypes.INTEGER,
         allowNull: false,

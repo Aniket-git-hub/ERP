@@ -5,16 +5,29 @@ import CustomError from "../../../utils/createError.js"
 async function addOutTimeService(userId, employeeId, attendanceId, attendanceData) {
 
     try {
-
+        // const employee = await ATTENDANCE.findByPk(attendanceId, {
+        //     where: {
+        //         employeeId,
+        //         UserId: userId,
+        //         inTime: {
+        //             [Op.not]: null
+        //         },
+        //         outTime: null
+        //     }
+        // })
+        // console.log(employee)
+        // console.log(employeeId)
+        // console.log(userId)
+        // console.log(attendanceId)
         const attendance = await ATTENDANCE.update(attendanceData, {
             where: {
-                employeeId: employeeId,
-                UserId: userId,
                 id: attendanceId,
+                employeeId,
+                UserId: userId,
                 inTime: {
-                    [Op.not]: "00:00:00"
+                    [Op.not]: null
                 },
-                outTime: "00:00:00"
+                outTime: null
             }
         })
         if (attendance[0] === 0) {
