@@ -15,7 +15,7 @@ async function loginController(req, res, next) {
         const token = jwt.sign(
             { userId: user.id },
             getEnvVariable('JWT_SECRET'),
-            { expiresIn: '1h' }
+            { expiresIn: '2h' }
         );
         res.status(200).json({ user, token, message: 'login successful' });
     } catch (error) {

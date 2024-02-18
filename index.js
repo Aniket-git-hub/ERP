@@ -59,6 +59,9 @@ app.use('/api/advance', advanceRoutes)
 import scrapSellRoutes from './routes/scrapSellRoutes.js';
 app.use('/api/scrap-sell', scrapSellRoutes)
 
+import paymentReceiptRoutes from './routes/paymentReceiptRoutes.js';
+app.use('/api/payment-receipt', paymentReceiptRoutes)
+
 import getDashboardData from './controllers/dashboard/getDashboardData.js';
 app.get('/api/dashboard', getDashboardData)
 

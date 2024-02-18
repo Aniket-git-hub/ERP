@@ -12,7 +12,6 @@ function verifyJWT(req, res, next) {
     } else {
         throw new CustomError('JsonWebTokenError', 'No token provided');
     }
-
     try {
         const decoded = jwt.verify(token, secret);
         req.user = decoded;
