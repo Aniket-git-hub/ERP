@@ -50,6 +50,9 @@ app.use('/api/invoice', invoiceRoutes);
 import employeeRoutes from './routes/employeeRoutes.js';
 app.use('/api/employee', employeeRoutes)
 
+import attendanceRoutes from "./routes/attendanceRoute.js";
+app.use('/api/attendance', attendanceRoutes)
+
 import getDashboardData from './controllers/dashboard/getDashboardData.js';
 app.get('/api/dashboard', getDashboardData)
 

@@ -18,7 +18,7 @@ const ATTENDANCE = sequelize.define('attendance', {
     },
     outTime: {
         type: DataTypes.TIME,
-        allowNull: false,
+        allowNull: true,
     }
 });
 
