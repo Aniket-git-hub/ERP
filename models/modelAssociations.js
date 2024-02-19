@@ -85,6 +85,10 @@ function setupAssociations() {
     TRANSACTIONS.belongsTo(EXPENSE)
     INVOICE.hasOne(INCOME)
     INCOME.belongsTo(INVOICE)
+    INCOME.hasMany(INVOICE)
+    INVOICE.belongsTo(INCOME)
+    INCOME.hasMany(SCRAP_SELL)
+    SCRAP_SELL.belongsTo(INCOME)
 
     // scrap sell associations
     USER.hasMany(SCRAP_SELL)

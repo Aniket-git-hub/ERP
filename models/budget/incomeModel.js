@@ -10,6 +10,10 @@ const INCOME = sequelize.define('income', {
     },
     period: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    amount: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     }
 });
