@@ -15,17 +15,17 @@ const CLIENT = sequelize.define('Client', {
     email: {
         type: DataTypes.STRING,
         allowNull: true,
-        // unique: true,
+        unique: true,
     },
     phone: {
         type: DataTypes.STRING,
         allowNull: true,
-        // unique: true,
+        unique: true,
     },
     gst: {
         type: DataTypes.STRING,
         allowNull: true,
-        // unique: true,
+        unique: true,
     },
     address: {
         type: DataTypes.STRING,

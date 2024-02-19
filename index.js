@@ -68,6 +68,15 @@ app.use('/api/expense-category', expenseCategoryRoutes)
 import expenseRoutes from './routes/expenseRoutes.js';
 app.use('/api/expense', expenseRoutes)
 
+import incomeRoutes from './routes/incomeRoutes.js';
+app.use('/api/income', incomeRoutes)
+
+import budgetRoutes from './routes/budgetRoutes.js';
+app.use('/api/budget', budgetRoutes)
+
+import transactionRoutes from './routes/transactionRoutes.js';
+app.use('/api/transaction', transactionRoutes)
+
 import getDashboardData from './controllers/dashboard/getDashboardData.js';
 app.get('/api/dashboard', getDashboardData)
 
