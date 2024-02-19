@@ -1,6 +1,6 @@
 import DEDUCTION from "../../../models/employee/deductionModel.js";
 
-async function createDeductionService(userId, employeeId, amount, date, advanceId) {
+async function createDeductionService(userId, employeeId, amount, date, advanceId, transaction) {
     try {
         const deduction = await DEDUCTION.create({
             UserId: userId,
@@ -8,6 +8,8 @@ async function createDeductionService(userId, employeeId, amount, date, advanceI
             amountDeducted: amount,
             date,
             advanceId
+        }, {
+            transaction
         })
         return deduction
     } catch (error) {
