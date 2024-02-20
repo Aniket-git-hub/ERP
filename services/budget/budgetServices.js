@@ -1,7 +1,12 @@
-import BUDGET from "../../models/budget/budgetModel.js";
-import CustomError from "../../utils/createError.js";
+import BUDGET from '../../models/budget/budgetModel.js';
+import CustomError from '../../utils/createError.js';
 
-export async function createBudgetService(userId, amount, date, expenseCategory) {
+export async function createBudgetService(
+    userId,
+    amount,
+    date,
+    expenseCategory
+) {
     try {
         const budget = await BUDGET.create({
             UserId: userId,
@@ -15,14 +20,13 @@ export async function createBudgetService(userId, amount, date, expenseCategory)
     }
 }
 
-
 export async function updateBudgetService(userId, budgetId, newData) {
     try {
         const [updatedRowsCount] = await BUDGET.update(newData, {
             where: {
                 id: budgetId,
-                UserId: userId,
-            },
+                UserId: userId
+            }
         });
 
         if (updatedRowsCount === 0) {
@@ -58,7 +62,6 @@ export async function deleteBudgetService(userId, budgetId) {
         throw error;
     }
 }
-
 
 export async function getBudgetService(userId) {
     try {

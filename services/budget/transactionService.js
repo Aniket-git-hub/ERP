@@ -1,31 +1,40 @@
-import TRANSACTIONS from "../../models/budget/transactions.js";
-import CustomError from "../../utils/createError.js";
+import TRANSACTIONS from '../../models/budget/transactions.js';
+import CustomError from '../../utils/createError.js';
 
-
-export async function createTransactionService(userId, type, amount, date, incomeId = null, expenseId = null, transaction) {
+export async function createTransactionService(
+    userId,
+    type,
+    amount,
+    date,
+    incomeId = null,
+    expenseId = null,
+    transaction
+) {
     try {
-        const t = await TRANSACTIONS.create({
-            UserId: userId,
-            type,
-            amount,
-            date,
-            incomeId,
-            expenseId,
-        }, { transaction });
+        const t = await TRANSACTIONS.create(
+            {
+                UserId: userId,
+                type,
+                amount,
+                date,
+                incomeId,
+                expenseId
+            },
+            { transaction }
+        );
         return t;
     } catch (error) {
         throw error;
     }
 }
 
-
 export async function updateTransactionService(userId, transactionId, newData) {
     try {
         const [updatedRowsCount] = await TRANSACTIONS.update(newData, {
             where: {
                 id: transactionId,
-                UserId: userId,
-            },
+                UserId: userId
+            }
         });
 
         if (updatedRowsCount === 0) {
@@ -34,7 +43,7 @@ export async function updateTransactionService(userId, transactionId, newData) {
 
         const updatedTransaction = await TRANSACTIONS.findByPk(transactionId, {
             where: {
-                UserId: userId,
+                UserId: userId
             }
         });
         return updatedTransaction;
@@ -57,16 +66,13 @@ export async function getTransactionService(userId) {
     }
 }
 
-
 export async function deleteTransactionService(userId, transactionId) {
     try {
-        const transaction = await TRANSACTIONS.findByPk(transactionId,
-            {
-                where: {
-                    UserId: userId
-                }
+        const transaction = await TRANSACTIONS.findByPk(transactionId, {
+            where: {
+                UserId: userId
             }
-        );
+        });
 
         if (!transaction) {
             throw new CustomError('TransactionError', 'Transaction not found');

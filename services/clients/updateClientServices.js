@@ -5,7 +5,7 @@ async function updateClientService(userId, clientId, clientData) {
         const updatedClient = await CLIENT.update(clientData, {
             where: { id: clientId, UserId: userId },
             returning: true,
-            plain: true,
+            plain: true
         });
         if (!updatedClient) {
             throw new CustomError('ClientError', 'Client not found');

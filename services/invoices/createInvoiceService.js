@@ -1,6 +1,6 @@
-import { Op, Sequelize } from "sequelize";
-import INVOICE from "../../models/work/invoiceModel.js";
-import JOB from "../../models/work/jobModel.js";
+import { Op, Sequelize } from 'sequelize';
+import INVOICE from '../../models/work/invoiceModel.js';
+import JOB from '../../models/work/jobModel.js';
 
 async function createInvoiceService(
     jobIds,
@@ -24,13 +24,21 @@ async function createInvoiceService(
             jobs = await JOB.findAll({
                 where: { id: { [Op.in]: jobIds }, ClientId: clientId },
                 attributes: [
-                    [Sequelize.fn('sum', Sequelize.col('quantity')), 'totalQuantity'],
                     [
-                        Sequelize.fn('sum', Sequelize.literal('(quantity * (millingRate + drillingRate))')),
+                        Sequelize.fn('sum', Sequelize.col('quantity')),
+                        'totalQuantity'
+                    ],
+                    [
+                        Sequelize.fn(
+                            'sum',
+                            Sequelize.literal(
+                                '(quantity * (millingRate + drillingRate))'
+                            )
+                        ),
                         'totalAmount'
                     ]
                 ],
-                raw: true,
+                raw: true
             });
 
             totalAmountBeforeTax = parseFloat(jobs[0].totalAmount);
@@ -47,13 +55,13 @@ async function createInvoiceService(
             iGstPercentage,
             sGstPercentage,
             totalAmountBeforeTax,
-            notes,
+            notes
         });
         await invoice.addJobs(jobIds);
 
         return invoice;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 

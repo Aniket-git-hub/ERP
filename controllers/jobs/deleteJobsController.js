@@ -1,4 +1,4 @@
-import deleteJobService from "../../services/jobs/deleteJobService.js";
+import deleteJobService from '../../services/jobs/deleteJobService.js';
 async function deleteJobController(req, res, next) {
     const { jobId } = req.params;
     const { userId } = req.user;
@@ -8,7 +8,7 @@ async function deleteJobController(req, res, next) {
             message: 'Job deleted successfully'
         });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 

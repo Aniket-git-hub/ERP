@@ -1,4 +1,4 @@
-import formatDate from "../formatDate.js";
+import formatDate from '../formatDate.js';
 
 function generateInvoiceTemplate(
     client,
@@ -218,7 +218,9 @@ function generateInvoiceTemplate(
             <section class="lower">
                 <section class="left">
                     <b>Billed To:</b>
-                    <p>${client.name ? client.name : '-'}, ${client.address ? client.address : '-'}</p>
+                    <p>${client.name ? client.name : '-'}, ${
+                        client.address ? client.address : '-'
+                    }</p>
                     <b>Customer GST No:</b>
                     <p>${client.gst ? client.gst : '-'}</p>
                     <b>State:</b>
@@ -230,8 +232,9 @@ function generateInvoiceTemplate(
                             <th>Invoice No:</th>
                             <td>${invoiceNumber ? invoiceNumber : '-'}</td>
                             <th>Dated:</th>
-                            <td>${invoiceDate ? formatDate(invoiceDate) : '-'
-        }</td >
+                            <td>${
+                                invoiceDate ? formatDate(invoiceDate) : '-'
+                            }</td >
                         </tr >
                         <tr>
                             <th>Our Ch. No:</th>
@@ -253,7 +256,9 @@ function generateInvoiceTemplate(
                         </tr>
                         <tr>
                             <th colspan="2">Dispatched through:</th>
-                            <td colspan="2">${vehicleNumber ? vehicleNumber : '-'}</td>
+                            <td colspan="2">${
+                                vehicleNumber ? vehicleNumber : '-'
+                            }</td>
                         </tr>
                     </table >
                 </section >
@@ -286,17 +291,23 @@ function generateInvoiceTemplate(
                 </tr>
                 <tr>
                     <th colspan="4">CGST </th>
-                    <th colspan="1">${cGstPercentage ? cGstPercentage : '-'} %</th>
+                    <th colspan="1">${
+                        cGstPercentage ? cGstPercentage : '-'
+                    } %</th>
                     <td>${cGstAmount ? cGstAmount : '-'}</td>
                 </tr>
                 <tr>
                     <th colspan="4">SGST </th>
-                    <th colspan="1">${sGstPercentage ? sGstPercentage : '-'} %</th>
+                    <th colspan="1">${
+                        sGstPercentage ? sGstPercentage : '-'
+                    } %</th>
                     <td>${sGstAmount ? sGstAmount : '-'}</td>
                 </tr>
                 <tr>
                     <th colspan="4">IGST </th>
-                    <th colspan="1">${iGstPercentage ? iGstPercentage : '-'} %</th>
+                    <th colspan="1">${
+                        iGstPercentage ? iGstPercentage : '-'
+                    } %</th>
                     <td> ${iGstAmount ? iGstAmount : '-'} </td>
                 </tr>
                 <tr>
@@ -309,7 +320,9 @@ function generateInvoiceTemplate(
                 </tr>
                 <tr>
                     <th>Rupees:</th>
-                    <td colspan="5"> ${amountInWords ? amountInWords : '-'} </td>
+                    <td colspan="5"> ${
+                        amountInWords ? amountInWords : '-'
+                    } </td>
                 </tr>
             </table>
             <p class="note">

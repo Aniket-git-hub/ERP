@@ -1,4 +1,4 @@
-import EXPENSE from "../../../models/budget/expenseModel.js";
+import EXPENSE from '../../../models/budget/expenseModel.js';
 import CustomError from '../../../utils/createError.js';
 
 async function deleteExpenseService(userId, expenseId) {
@@ -20,4 +20,4 @@ async function deleteExpenseService(userId, expenseId) {
     }
 }
 
-export default deleteExpenseService
+export default deleteExpenseService;

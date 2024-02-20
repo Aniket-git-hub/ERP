@@ -10,7 +10,7 @@ const EXPENSE_CATEGORY = sequelize.define('expense_category', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     }
 });
 

@@ -1,4 +1,4 @@
-import deleteMaterialService from "../../services/material/deleteMaterialService.js";
+import deleteMaterialService from '../../services/material/deleteMaterialService.js';
 async function deleteMaterialController(req, res, next) {
     const { materialId } = req.params;
     try {
@@ -7,7 +7,7 @@ async function deleteMaterialController(req, res, next) {
             message: 'Material deleted successfully'
         });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 

@@ -1,18 +1,18 @@
-import EMPLOYEE from "../../models/employee/employeeModel.js";
-import CustomError from "../../utils/createError.js";
+import EMPLOYEE from '../../models/employee/employeeModel.js';
+import CustomError from '../../utils/createError.js';
 
 async function deleteEmployeeService(userId, employeeId) {
     try {
         const deletedEmployee = await EMPLOYEE.destroy({
-            where: { UserId: userId, id: employeeId },
-        })
+            where: { UserId: userId, id: employeeId }
+        });
 
         if (!deletedEmployee) {
-            throw new CustomError("EmployeeError", "Couldn't delete employee")
+            throw new CustomError('EmployeeError', "Couldn't delete employee");
         }
         return deletedEmployee;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 

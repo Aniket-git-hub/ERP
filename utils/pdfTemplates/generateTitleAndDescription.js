@@ -1,4 +1,3 @@
-
 function generateTitleAndDescription(filters) {
     let title = 'Report';
     let description = 'This report contains data';
@@ -42,8 +41,8 @@ function generateTitleAndDescription(filters) {
         title += ` to ${filters.toDate}`;
         description += ` and the date ${filters.toDate}`;
     }
-    description += `, computer generated on ${new Date().toLocaleString()}`
+    description += `, computer generated on ${new Date().toLocaleString()}`;
     return { title, description };
 }
 
-export default generateTitleAndDescription
+export default generateTitleAndDescription;

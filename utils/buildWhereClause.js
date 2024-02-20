@@ -3,9 +3,12 @@ import { Op } from 'sequelize';
 function buildWhereClause(filters, keys, dateField = 'date') {
     const whereClause = {};
 
-    keys.forEach(key => {
+    keys.forEach((key) => {
         if (filters[key] && key !== 'fromDate' && key !== 'toDate') {
-            whereClause[key] = filters[key] instanceof Date ? new Date(filters[key]) : filters[key];
+            whereClause[key] =
+                filters[key] instanceof Date
+                    ? new Date(filters[key])
+                    : filters[key];
         }
     });
 
@@ -21,6 +24,5 @@ function buildWhereClause(filters, keys, dateField = 'date') {
 
     return whereClause;
 }
-
 
 export default buildWhereClause;

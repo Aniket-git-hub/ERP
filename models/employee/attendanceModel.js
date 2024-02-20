@@ -10,15 +10,15 @@ const ATTENDANCE = sequelize.define('attendance', {
     },
     date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
     inTime: {
         type: DataTypes.TIME,
-        allowNull: false,
+        allowNull: false
     },
     outTime: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: true
     }
 });
 

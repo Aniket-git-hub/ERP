@@ -10,12 +10,12 @@ const BUDGET = sequelize.define('budget', {
     },
     amount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     date: {
         type: DataTypes.DATE,
         allowNull: false
-    },
+    }
 });
 
 export default BUDGET;

@@ -6,28 +6,28 @@ const DELIVERY_CHALLAN = sequelize.define('delivery_challan', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
+        allowNull: false
     },
     challanNumber: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     challanDate: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
     quantity: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
     },
     deliveryThrough: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
     },
     invoice: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-    },
+        allowNull: true
+    }
 });
 
 export default DELIVERY_CHALLAN;

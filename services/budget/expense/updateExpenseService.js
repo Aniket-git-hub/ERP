@@ -1,13 +1,12 @@
-import EXPENSE from "../../../models/budget/expenseModel.js";
+import EXPENSE from '../../../models/budget/expenseModel.js';
 
 async function updateExpenseService(userId, expenseId, newData) {
     try {
-
         const [updatedRowsCount] = await EXPENSE.update(newData, {
             where: {
                 id: expenseId,
                 UserId: userId
-            },
+            }
         });
 
         if (updatedRowsCount === 0) {

@@ -1,8 +1,8 @@
-import deleteIncomeService from "../../../services/budget/income/deleteIncomeService.js";
+import deleteIncomeService from '../../../services/budget/income/deleteIncomeService.js';
 
 async function deleteIncomeController(req, res, next) {
     const { incomeId } = req.params;
-    const { userId } = req.user
+    const { userId } = req.user;
     try {
         await deleteIncomeService(userId, incomeId);
         res.json({

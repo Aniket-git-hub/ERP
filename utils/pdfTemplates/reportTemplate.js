@@ -8,15 +8,15 @@ async function generateReportTemplate(
     companyPhoneOne = '7559410568',
     companyPhoneTwo = '9130827065'
 ) {
-    let data = await JSON.parse(json)
-    data.map(d => {
+    let data = await JSON.parse(json);
+    data.map((d) => {
         if (d.Client) {
-            d.Client = d.Client.name
+            d.Client = d.Client.name;
         }
         if (d.Material) {
-            d.Material = d.Material.name
+            d.Material = d.Material.name;
         }
-    })
+    });
 
     let html = `
         <!DOCTYPE html>
@@ -151,7 +151,9 @@ async function generateReportTemplate(
     data.forEach((d) => {
         html += `<tr> <td></td> `;
         for (let key in d) {
-            html += `<td>${key === 'date' ? new Date(d[key]).toLocaleDateString() : d[key]}</td>`;
+            html += `<td>${
+                key === 'date' ? new Date(d[key]).toLocaleDateString() : d[key]
+            }</td>`;
         }
         html += ` </tr>`;
     });

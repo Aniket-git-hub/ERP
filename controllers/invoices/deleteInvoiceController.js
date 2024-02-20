@@ -1,8 +1,8 @@
-import deleteInvoiceService from "../../services/invoices/deleteInvoiceService.js";
+import deleteInvoiceService from '../../services/invoices/deleteInvoiceService.js';
 
 async function deleteInvoiceController(req, res, next) {
     const { invoiceId } = req.params;
-    const { userId } = req.user
+    const { userId } = req.user;
     try {
         await deleteInvoiceService(userId, invoiceId);
 
@@ -10,9 +10,8 @@ async function deleteInvoiceController(req, res, next) {
             success: true,
             message: 'Invoice deleted successfully'
         });
-
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 

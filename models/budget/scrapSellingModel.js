@@ -14,15 +14,15 @@ const SCRAP_SELL = sequelize.define('scrap_sell', {
     },
     weight: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     rate: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     amount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     buyer: {
         type: DataTypes.STRING,

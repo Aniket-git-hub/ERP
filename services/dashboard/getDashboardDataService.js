@@ -1,20 +1,18 @@
-import { Op } from "sequelize";
-import INVOICE from "../../models/work/invoiceModel.js";
-import JOB from "../../models/work/jobModel.js";
-import getCurrentMonthDates from "../../utils/getCurrentMonthDate.js";
-
+import { Op } from 'sequelize';
+import INVOICE from '../../models/work/invoiceModel.js';
+import JOB from '../../models/work/jobModel.js';
+import getCurrentMonthDates from '../../utils/getCurrentMonthDate.js';
 
 async function getDashboardDataService() {
     try {
-
-        const { startDate, endDate } = getCurrentMonthDates()
+        const { startDate, endDate } = getCurrentMonthDates();
 
         //  total invoices created in the current month
         const totalInvoices = await INVOICE.count({
             where: {
                 invoiceDate: {
                     [Op.gte]: startDate,
-                    [Op.lt]: endDate,
+                    [Op.lt]: endDate
                 }
             }
         });
@@ -23,41 +21,38 @@ async function getDashboardDataService() {
             where: {
                 createdAt: {
                     [Op.gte]: startDate,
-                    [Op.lt]: endDate,
+                    [Op.lt]: endDate
                 }
             }
-        })
+        });
 
         const totalQuantity = await JOB.sum('quantity', {
             where: {
                 createdAt: {
                     [Op.gte]: startDate,
-                    [Op.lt]: endDate,
+                    [Op.lt]: endDate
                 }
             }
-        })
+        });
 
         const totalJobs = await JOB.count({
             where: {
                 createdAt: {
                     [Op.gte]: startDate,
-                    [Op.lt]: endDate,
+                    [Op.lt]: endDate
                 }
             }
-        })
-
+        });
 
         return {
             totalInvoices,
             totalInvoicesAmount,
             totalQuantity,
-            totalJobs,
+            totalJobs
         };
-
     } catch (error) {
         throw error;
     }
-
 }
 
-export default getDashboardDataService
+export default getDashboardDataService;

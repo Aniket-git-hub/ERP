@@ -1,23 +1,23 @@
-import { Op } from "sequelize";
-import ATTENDANCE from "../../../models/employee/attendanceModel.js";
-import { getMonthRange } from "../../../utils/getMonthRage.js";
+import { Op } from 'sequelize';
+import ATTENDANCE from '../../../models/employee/attendanceModel.js';
+import { getMonthRange } from '../../../utils/getMonthRage.js';
 
 async function getAttendanceService(userId, employeeId, date) {
     try {
-        const { firstDay, lastDay } = getMonthRange(date)
+        const { firstDay, lastDay } = getMonthRange(date);
         const attendance = await ATTENDANCE.findAll({
             where: {
                 UserId: userId,
                 employeeId,
                 date: {
-                    [Op.between]: [firstDay, lastDay],
-                },
-            },
-        })
-        return attendance
+                    [Op.between]: [firstDay, lastDay]
+                }
+            }
+        });
+        return attendance;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default getAttendanceService
+export default getAttendanceService;

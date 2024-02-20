@@ -1,4 +1,4 @@
-import EXPENSE from "../../../models/budget/expenseModel.js";
+import EXPENSE from '../../../models/budget/expenseModel.js';
 
 async function getExpenseService(userId) {
     try {

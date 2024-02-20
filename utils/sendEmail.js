@@ -1,5 +1,5 @@
-import transporter from "../config/nodemailer.js";
-import getEnvVariable from "./env.js";
+import transporter from '../config/nodemailer.js';
+import getEnvVariable from './env.js';
 
 async function sendEmail(email, subject, template) {
     const mailOptions = {
@@ -7,12 +7,12 @@ async function sendEmail(email, subject, template) {
         to: email,
         subject: subject,
         html: template
-    }
+    };
     try {
-        const response = await transporter.sendMail(mailOptions)
-        return { response }
+        const response = await transporter.sendMail(mailOptions);
+        return { response };
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 

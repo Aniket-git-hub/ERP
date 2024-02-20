@@ -14,8 +14,8 @@ const DEDUCTION = sequelize.define('deduction', {
     },
     amountDeducted: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-    },
+        allowNull: false
+    }
 });
 
 export default DEDUCTION;

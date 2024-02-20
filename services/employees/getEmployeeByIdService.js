@@ -1,13 +1,13 @@
-import EMPLOYEE from "../../models/employee/employeeModel.js";
+import EMPLOYEE from '../../models/employee/employeeModel.js';
 
 async function getEmployeeByIdService(userId, employeeId) {
     try {
         const employee = await EMPLOYEE.findByPk(employeeId, {
-            where: { UserId: userId },
-        })
-        return employee
+            where: { UserId: userId }
+        });
+        return employee;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 

@@ -8,20 +8,27 @@ async function getJobByIdService(userId, jobId) {
             include: [
                 {
                     model: CLIENT,
-                    attributes: ['id', 'name', 'email', 'phone', 'gst', 'address'],
+                    attributes: [
+                        'id',
+                        'name',
+                        'email',
+                        'phone',
+                        'gst',
+                        'address'
+                    ]
                 },
                 {
                     model: MATERIAL,
-                    attributes: ['id', 'name', 'hardness', 'density'],
-                },
+                    attributes: ['id', 'name', 'hardness', 'density']
+                }
             ],
             where: {
                 UserId: userId
             }
-        })
-        return job
+        });
+        return job;
     } catch (err) {
-        throw err
+        throw err;
     }
 }
 

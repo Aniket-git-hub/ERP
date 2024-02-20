@@ -1,16 +1,16 @@
-import ATTENDANCE from "../../../models/employee/attendanceModel.js"
+import ATTENDANCE from '../../../models/employee/attendanceModel.js';
 
 async function addInTimeService(userId, employeeId, attendanceData) {
     try {
         const attendance = await ATTENDANCE.create({
             UserId: userId,
             employeeId: employeeId,
-            ...attendanceData,
-        })
-        return attendance
+            ...attendanceData
+        });
+        return attendance;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default addInTimeService
+export default addInTimeService;

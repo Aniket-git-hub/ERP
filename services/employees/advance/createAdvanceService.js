@@ -1,5 +1,11 @@
-import ADVANCE from "../../../models/employee/advanceModel.js"
-async function createAdvanceService(userId, employeeId, date, amount, description) {
+import ADVANCE from '../../../models/employee/advanceModel.js';
+async function createAdvanceService(
+    userId,
+    employeeId,
+    date,
+    amount,
+    description
+) {
     try {
         const advance = await ADVANCE.create({
             UserId: userId,
@@ -8,12 +14,12 @@ async function createAdvanceService(userId, employeeId, date, amount, descriptio
             amount,
             description,
             remainingAmount: amount
-        })
+        });
 
-        return advance
+        return advance;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default createAdvanceService
+export default createAdvanceService;

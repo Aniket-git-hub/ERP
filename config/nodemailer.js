@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: getEnvVariable('NODEMAILER_USER'),
-        pass: getEnvVariable('NODEMAILER_PASS'),
-    },
+        pass: getEnvVariable('NODEMAILER_PASS')
+    }
 });
 
-export default transporter
+export default transporter;

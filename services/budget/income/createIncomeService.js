@@ -2,24 +2,41 @@ import sequelize from '../../../config/database.js';
 import INCOME from '../../../models/budget/incomeModel.js';
 import { createTransactionService } from '../transactionService.js';
 
-async function createIncomeService(userId, period, amount, invoiceIds, scrapSellIds) {
+async function createIncomeService(
+    userId,
+    period,
+    amount,
+    invoiceIds,
+    scrapSellIds
+) {
     const transaction = await sequelize.transaction();
 
     try {
-        const income = await INCOME.create({
-            UserId: userId,
-            period,
-            amount
-        }, { transaction });
+        const income = await INCOME.create(
+            {
+                UserId: userId,
+                period,
+                amount
+            },
+            { transaction }
+        );
 
         if (invoiceIds && invoiceIds.length > 0) {
-            await INCOME.addInvoices(invoiceIds, { transaction })
+            await INCOME.addInvoices(invoiceIds, { transaction });
         }
         if (scrapSellIds && scrapSellIds.length > 0) {
-            await INCOME.addScrapSell(scrapSellIds, { transaction })
+            await INCOME.addScrapSell(scrapSellIds, { transaction });
         }
 
-        await createTransactionService(userId, 'credit', amount, new Date(), income.id, null, transaction)
+        await createTransactionService(
+            userId,
+            'credit',
+            amount,
+            new Date(),
+            income.id,
+            null,
+            transaction
+        );
 
         await transaction.commit();
 

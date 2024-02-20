@@ -1,5 +1,5 @@
-import sequelize from "./config/database.js";
-import setupAssociations from "./models/modelAssociations.js";
+import sequelize from './config/database.js';
+import setupAssociations from './models/modelAssociations.js';
 
 function syncDatabase() {
     setupAssociations();

@@ -1,11 +1,11 @@
-import EXPENSE_CATEGORY from "../../models/budget/expenseCategoryModel.js";
-import CustomError from "../../utils/createError.js";
+import EXPENSE_CATEGORY from '../../models/budget/expenseCategoryModel.js';
+import CustomError from '../../utils/createError.js';
 
 export async function createExpenseCategoryService(userId, name) {
     try {
         const expenseCategory = await EXPENSE_CATEGORY.create({
             name,
-            UserId: userId,
+            UserId: userId
         });
         return expenseCategory;
     } catch (error) {
@@ -13,13 +13,20 @@ export async function createExpenseCategoryService(userId, name) {
     }
 }
 
-export async function updateExpenseCategoryService(userId, expenseCategoryId, newName) {
+export async function updateExpenseCategoryService(
+    userId,
+    expenseCategoryId,
+    newName
+) {
     try {
-        const expenseCategory = await EXPENSE_CATEGORY.findByPk(expenseCategoryId, {
-            where: {
-                UserId: userId
+        const expenseCategory = await EXPENSE_CATEGORY.findByPk(
+            expenseCategoryId,
+            {
+                where: {
+                    UserId: userId
+                }
             }
-        });
+        );
 
         if (!expenseCategory) {
             throw new CustomError('ExpenseError', 'Expense category not found');
@@ -36,11 +43,14 @@ export async function updateExpenseCategoryService(userId, expenseCategoryId, ne
 
 export async function deleteExpenseCategoryService(userId, expenseCategoryId) {
     try {
-        const expenseCategory = await EXPENSE_CATEGORY.findByPk(expenseCategoryId, {
-            where: {
-                UserId: userId,
+        const expenseCategory = await EXPENSE_CATEGORY.findByPk(
+            expenseCategoryId,
+            {
+                where: {
+                    UserId: userId
+                }
             }
-        });
+        );
 
         if (!expenseCategory) {
             throw new CustomError('ExpenseError', 'Expense category not found');
@@ -55,7 +65,6 @@ export async function deleteExpenseCategoryService(userId, expenseCategoryId) {
 
 export async function getExpenseCategoriesService(userId) {
     try {
-
         const expenseCategories = await EXPENSE_CATEGORY.findAll({
             where: {
                 UserId: userId
@@ -67,4 +76,3 @@ export async function getExpenseCategoriesService(userId) {
         throw error;
     }
 }
-

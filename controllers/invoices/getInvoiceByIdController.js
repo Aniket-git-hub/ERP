@@ -1,17 +1,16 @@
-import getInvoiceByIdService from "../../services/invoices/getInvoiceByIdService.js";
+import getInvoiceByIdService from '../../services/invoices/getInvoiceByIdService.js';
 
 async function getInvoiceByIdController(req, res, next) {
     const { invoiceId } = req.params;
-    const { userId } = req.user
+    const { userId } = req.user;
     try {
         const invoice = await getInvoiceByIdService(userId, invoiceId);
         res.json({
             success: true,
-            invoice,
+            invoice
         });
-
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 
