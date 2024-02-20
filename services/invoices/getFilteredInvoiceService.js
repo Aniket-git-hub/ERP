@@ -22,7 +22,7 @@ async function getFilteredInvoiceService(
         const items = await INVOICE.findAndCountAll({
             offset,
             limit,
-            where: { UserId: userId, ...whereClause },
+            where: { userId, ...whereClause },
             order: [['createdAt', 'DESC']],
             include: [
                 {

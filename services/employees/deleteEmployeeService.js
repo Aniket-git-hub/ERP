@@ -4,7 +4,7 @@ import CustomError from '../../utils/createError.js';
 async function deleteEmployeeService(userId, employeeId) {
     try {
         const deletedEmployee = await EMPLOYEE.destroy({
-            where: { UserId: userId, id: employeeId }
+            where: { userId, id: employeeId }
         });
 
         if (!deletedEmployee) {

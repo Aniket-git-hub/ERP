@@ -11,7 +11,7 @@ async function getAdvanceService(userId, employeeId, filters) {
         ]);
         const advances = await ADVANCE.findAll({
             where: {
-                UserId: userId,
+                userId,
                 employeeId,
                 ...whereClause
             },

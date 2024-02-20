@@ -4,7 +4,7 @@ import CustomError from '../../utils/createError.js';
 async function updateInvoiceService(userId, invoiceId, updatedFields) {
     try {
         const updatedInvoice = await INVOICE.update(updatedFields, {
-            where: { id: invoiceId, UserId: userId },
+            where: { id: invoiceId, userId },
             returning: true,
             plain: true
         });

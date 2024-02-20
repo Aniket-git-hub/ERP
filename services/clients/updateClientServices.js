@@ -3,7 +3,7 @@ import CustomError from '../../utils/createError.js';
 async function updateClientService(userId, clientId, clientData) {
     try {
         const updatedClient = await CLIENT.update(clientData, {
-            where: { id: clientId, UserId: userId },
+            where: { id: clientId, userId },
             returning: true,
             plain: true
         });

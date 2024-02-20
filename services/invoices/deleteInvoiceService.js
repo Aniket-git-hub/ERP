@@ -4,7 +4,7 @@ import CustomError from '../../utils/createError.js';
 async function deleteInvoiceService(userId, invoiceId) {
     try {
         const deletedRowsCount = await INVOICE.destroy({
-            where: { id: invoiceId, UserId: userId }
+            where: { id: invoiceId, userId }
         });
 
         if (deletedRowsCount === 0) {

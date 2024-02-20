@@ -11,7 +11,7 @@ async function getPaymentReceiptsService(userId, employeeId, filters, config) {
         ]);
         const paymentReceipts = await PAYMENT_RECEIPT.findAll({
             where: {
-                UserId: userId,
+                userId,
                 employeeId,
                 ...whereClause
             },

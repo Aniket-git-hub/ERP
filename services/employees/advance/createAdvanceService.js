@@ -8,7 +8,7 @@ async function createAdvanceService(
 ) {
     try {
         const advance = await ADVANCE.create({
-            UserId: userId,
+            userId,
             employeeId,
             date,
             amount,

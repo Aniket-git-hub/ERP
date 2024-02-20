@@ -5,7 +5,7 @@ async function deleteIncomeService(userId, incomeId) {
     try {
         const income = await INCOME.findByPk(incomeId, {
             where: {
-                UserId: userId
+                userId
             }
         });
 

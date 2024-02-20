@@ -14,7 +14,7 @@ async function createIncomeService(
     try {
         const income = await INCOME.create(
             {
-                UserId: userId,
+                userId,
                 period,
                 amount
             },

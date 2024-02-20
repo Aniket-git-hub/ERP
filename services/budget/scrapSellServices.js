@@ -4,7 +4,7 @@ import CustomError from '../../utils/createError.js';
 export async function addScrapSellService(userId, scrapSellData) {
     try {
         const scrapSell = await SCRAP_SELL.create({
-            UserId: userId,
+            userId,
             ...scrapSellData
         });
         return scrapSell;
@@ -22,7 +22,7 @@ export async function updateScrapSellService(
         const [updatedRows] = await SCRAP_SELL.update(scrapSellData, {
             where: {
                 id: scrapSellId,
-                UserId: userId
+                userId
             }
         });
 
@@ -45,7 +45,7 @@ export async function deleteScrapSellService(userId, scrapSellId) {
         const deletedRows = await SCRAP_SELL.destroy({
             where: {
                 id: scrapSellId,
-                UserId: userId
+                userId
             }
         });
 
@@ -65,7 +65,7 @@ export async function deleteScrapSellService(userId, scrapSellId) {
 export async function getAllScrapSellsService(userId) {
     try {
         const scrapSells = await SCRAP_SELL.findAll({
-            where: { UserId: userId }
+            where: { userId }
         });
         return scrapSells;
     } catch (error) {
@@ -76,7 +76,7 @@ export async function getAllScrapSellsService(userId) {
 export async function getScrapSellByIdService(userId, scrapSellId) {
     try {
         const scrapSell = await SCRAP_SELL.findByPk(scrapSellId, {
-            where: { UserId: userId }
+            where: { userId }
         });
 
         if (!scrapSell) {

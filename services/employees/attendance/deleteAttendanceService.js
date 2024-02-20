@@ -5,7 +5,7 @@ async function deleteAttendanceService(userId, employeeId, attendanceId) {
         const deletedAttendance = await ATTENDANCE.destroy({
             where: {
                 employeeId,
-                UserId: userId,
+                userId,
                 id: attendanceId
             }
         });

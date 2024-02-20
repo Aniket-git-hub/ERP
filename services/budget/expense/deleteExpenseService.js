@@ -5,7 +5,7 @@ async function deleteExpenseService(userId, expenseId) {
     try {
         const expense = await EXPENSE.findByPk(expenseId, {
             where: {
-                UserId: userId
+                userId
             }
         });
 

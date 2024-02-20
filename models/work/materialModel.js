@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/database.js';
 
-const MATERIAL = sequelize.define('Material', {
+const MATERIAL = sequelize.define('material', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

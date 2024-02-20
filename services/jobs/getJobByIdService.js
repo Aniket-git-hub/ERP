@@ -23,7 +23,7 @@ async function getJobByIdService(userId, jobId) {
                 }
             ],
             where: {
-                UserId: userId
+                userId
             }
         });
         return job;

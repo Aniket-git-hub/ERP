@@ -22,9 +22,9 @@ async function addJobService(
             date,
             size,
             imageUrl,
-            UserId: userId,
-            ClientId: clientId,
-            MaterialId: materialId
+            userId,
+            clientId,
+            materialId
         });
         return job;
     } catch (err) {

@@ -3,7 +3,7 @@ import ATTENDANCE from '../../../models/employee/attendanceModel.js';
 async function addInTimeService(userId, employeeId, attendanceData) {
     try {
         const attendance = await ATTENDANCE.create({
-            UserId: userId,
+            userId,
             employeeId: employeeId,
             ...attendanceData
         });

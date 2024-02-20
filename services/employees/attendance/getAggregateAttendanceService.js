@@ -46,7 +46,7 @@ async function getAggregateAttendanceService(
                 ]
             ],
             where: {
-                UserId: userId,
+                userId,
                 employeeId,
                 date: {
                     [Op.between]: [fromDate, toDate]

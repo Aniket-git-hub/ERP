@@ -27,7 +27,7 @@ async function getInvoiceByIdService(userId, invoiceId) {
                 exclude: ['ClientId']
             },
             where: {
-                UserId: userId
+                userId
             }
         });
 

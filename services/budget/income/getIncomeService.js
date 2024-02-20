@@ -4,7 +4,7 @@ async function getIncomeService(userId) {
     try {
         const income = await INCOME.findAll({
             where: {
-                UserId: userId
+                userId
             }
         });
 

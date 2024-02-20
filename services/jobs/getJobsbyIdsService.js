@@ -5,7 +5,7 @@ async function getJobByIdsService(userId, jobs) {
         const job = await JOB.findAll({
             where: {
                 id: jobs,
-                UserId: userId
+                userId
             }
         });
         return job;
