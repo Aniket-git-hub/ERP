@@ -6,22 +6,21 @@ const MATERIAL = sequelize.define('Material', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
+        allowNull: false
     },
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: true
     },
     hardness: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
     },
     density: {
         type: DataTypes.FLOAT,
-        allowNull: true,
-    },
+        allowNull: true
+    }
 });
-
 
 export default MATERIAL;

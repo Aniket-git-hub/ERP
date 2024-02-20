@@ -1,6 +1,19 @@
 import JOB from '../../models/work/jobModel.js';
-import CustomError from "../../utils/createError.js";
-async function updateJobService(jobId, userId, drawingNumber, description, quantity, millingRate, drillingRate, date, size, clientId, materialId, imageUrl) {
+import CustomError from '../../utils/createError.js';
+async function updateJobService(
+    jobId,
+    userId,
+    drawingNumber,
+    description,
+    quantity,
+    millingRate,
+    drillingRate,
+    date,
+    size,
+    clientId,
+    materialId,
+    imageUrl
+) {
     try {
         const updatedJob = await JOB.update(
             {
@@ -13,17 +26,17 @@ async function updateJobService(jobId, userId, drawingNumber, description, quant
                 size,
                 ClientId: clientId,
                 MaterialId: materialId,
-                imageUrl,
+                imageUrl
             },
             {
                 where: { id: jobId, UserId: userId },
                 returning: true,
-                plain: true,
+                plain: true
             }
         );
 
         if (!updatedJob) {
-            throw new CustomError("JobError", 'Job not found');
+            throw new CustomError('JobError', 'Job not found');
         }
 
         return updatedJob[1];

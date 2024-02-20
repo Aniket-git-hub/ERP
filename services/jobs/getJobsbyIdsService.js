@@ -7,10 +7,10 @@ async function getJobByIdsService(userId, jobs) {
                 id: jobs,
                 UserId: userId
             }
-        })
-        return job
+        });
+        return job;
     } catch (err) {
-        throw err
+        throw err;
     }
 }
 

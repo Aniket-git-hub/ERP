@@ -3,13 +3,17 @@ import buildWhereClause from '../../utils/buildWhereClause.js';
 
 async function getFilteredClientsService(page = 1, limit = 10, filters = {}) {
     const offset = (page - 1) * limit;
-    const whereClause = buildWhereClause(filters, ['name', 'email', 'gst', 'phone', 'createdAt', 'updatedAt'], 'createdAt')
+    const whereClause = buildWhereClause(
+        filters,
+        ['name', 'email', 'gst', 'phone', 'createdAt', 'updatedAt'],
+        'createdAt'
+    );
     try {
         const items = await CLIENT.findAndCountAll({
             offset,
             limit,
             where: whereClause,
-            order: [['createdAt', 'DESC']],
+            order: [['createdAt', 'DESC']]
         });
 
         const { count: totalItems, rows: itemData } = items;
@@ -22,11 +26,11 @@ async function getFilteredClientsService(page = 1, limit = 10, filters = {}) {
             hasNextPage: page < totalPages,
             limit,
             countInCurrentPage: itemData.length,
-            items: itemData,
+            items: itemData
         };
     } catch (error) {
         throw error;
     }
 }
 
-export default getFilteredClientsService
+export default getFilteredClientsService;

@@ -1,19 +1,29 @@
-import DEDUCTION from "../../../models/employee/deductionModel.js";
+import DEDUCTION from '../../../models/employee/deductionModel.js';
 
-async function createDeductionService(userId, employeeId, amount, date, advanceId, transaction) {
+async function createDeductionService(
+    userId,
+    employeeId,
+    amount,
+    date,
+    advanceId,
+    transaction
+) {
     try {
-        const deduction = await DEDUCTION.create({
-            UserId: userId,
-            employeeId,
-            amountDeducted: amount,
-            date,
-            advanceId
-        }, {
-            transaction
-        })
-        return deduction
+        const deduction = await DEDUCTION.create(
+            {
+                UserId: userId,
+                employeeId,
+                amountDeducted: amount,
+                date,
+                advanceId
+            },
+            {
+                transaction
+            }
+        );
+        return deduction;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 

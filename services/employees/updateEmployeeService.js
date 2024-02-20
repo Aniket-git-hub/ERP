@@ -1,5 +1,5 @@
-import EMPLOYEE from "../../models/employee/employeeModel.js";
-import CustomError from "../../utils/createError.js";
+import EMPLOYEE from '../../models/employee/employeeModel.js';
+import CustomError from '../../utils/createError.js';
 
 async function updateEmployeeService(userId, employeeId, employeeData) {
     try {
@@ -8,7 +8,7 @@ async function updateEmployeeService(userId, employeeId, employeeData) {
         });
 
         if (!employee) {
-            throw new CustomError("EmployeeError", "Couldn't find employee")
+            throw new CustomError('EmployeeError', "Couldn't find employee");
         }
 
         const updatedEmployee = await EMPLOYEE.update(
@@ -19,7 +19,7 @@ async function updateEmployeeService(userId, employeeId, employeeData) {
         );
 
         if (!updatedEmployee) {
-            throw new CustomError("EmployeeError", "Couldn't update employee")
+            throw new CustomError('EmployeeError', "Couldn't update employee");
         }
 
         return updatedEmployee;

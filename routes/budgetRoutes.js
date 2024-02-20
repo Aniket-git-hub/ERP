@@ -1,5 +1,10 @@
 import express from 'express';
-import { createBudgetController, deleteBudgetController, getBudgetController, updateBudgetController } from '../controllers/budget/budgetController.js';
+import {
+    createBudgetController,
+    deleteBudgetController,
+    getBudgetController,
+    updateBudgetController
+} from '../controllers/budget/budgetController.js';
 import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();

@@ -1,19 +1,25 @@
 import MATERIAL from '../../models/work/materialModel.js';
 import CustomError from '../../utils/createError.js';
 
-async function updateMaterialService(userId, materialId, name, hardness, density) {
+async function updateMaterialService(
+    userId,
+    materialId,
+    name,
+    hardness,
+    density
+) {
     try {
         const updatedMaterial = await MATERIAL.update(
             { name, hardness, density },
             {
                 where: { id: materialId, UserId: userId },
                 returning: true,
-                plain: true,
+                plain: true
             }
         );
 
         if (!updatedMaterial) {
-            throw new CustomError("MaterialError", 'Material not found')
+            throw new CustomError('MaterialError', 'Material not found');
         }
 
         return updatedMaterial[1];

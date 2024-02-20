@@ -1,11 +1,22 @@
-import CLIENT from "../../models/work/clientModel.js";
-import INVOICE from "../../models/work/invoiceModel.js";
-import JOB from "../../models/work/jobModel.js";
-import buildWhereClause from "../../utils/buildWhereClause.js";
+import CLIENT from '../../models/work/clientModel.js';
+import INVOICE from '../../models/work/invoiceModel.js';
+import JOB from '../../models/work/jobModel.js';
+import buildWhereClause from '../../utils/buildWhereClause.js';
 
-async function getFilteredInvoiceService(userId, page = 1, limit = 10, filters = {}) {
+async function getFilteredInvoiceService(
+    userId,
+    page = 1,
+    limit = 10,
+    filters = {}
+) {
     const offset = (page - 1) * limit;
-    const whereClause = buildWhereClause(filters, ['invoiceDate', 'fromDate', 'toDate', 'invoiceNumber', 'ClientId'])
+    const whereClause = buildWhereClause(filters, [
+        'invoiceDate',
+        'fromDate',
+        'toDate',
+        'invoiceNumber',
+        'ClientId'
+    ]);
 
     try {
         const items = await INVOICE.findAndCountAll({
@@ -16,14 +27,21 @@ async function getFilteredInvoiceService(userId, page = 1, limit = 10, filters =
             include: [
                 {
                     model: CLIENT,
-                    attributes: ['id', 'name', 'email', 'phone', 'gst', 'address']
+                    attributes: [
+                        'id',
+                        'name',
+                        'email',
+                        'phone',
+                        'gst',
+                        'address'
+                    ]
                 },
                 {
                     model: JOB,
                     attributes: ['id']
                 }
             ]
-        })
+        });
 
         const { count: totalItems, rows: itemData } = items;
         const totalPages = Math.ceil(totalItems / limit);
@@ -41,7 +59,7 @@ async function getFilteredInvoiceService(userId, page = 1, limit = 10, filters =
             limit,
             countIncurrentPage: itemData.length,
             items: jobs
-        }
+        };
     } catch (error) {
         throw error;
     }

@@ -1,5 +1,5 @@
-import ADVANCE from "../../../models/employee/advanceModel.js";
-import buildWhereClause from "../../../utils/buildWhereClause.js";
+import ADVANCE from '../../../models/employee/advanceModel.js';
+import buildWhereClause from '../../../utils/buildWhereClause.js';
 
 async function getAdvanceService(userId, employeeId, filters) {
     try {
@@ -8,18 +8,18 @@ async function getAdvanceService(userId, employeeId, filters) {
             'fromDate',
             'toDate',
             'remainingAmount'
-        ])
+        ]);
         const advances = await ADVANCE.findAll({
             where: {
                 UserId: userId,
                 employeeId,
                 ...whereClause
             },
-            order: [['createdAt', 'ASC']],
-        })
-        return advances
+            order: [['createdAt', 'ASC']]
+        });
+        return advances;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 

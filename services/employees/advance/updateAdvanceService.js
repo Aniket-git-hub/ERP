@@ -1,20 +1,26 @@
-import ADVANCE from "../../../models/employee/advanceModel.js"
+import ADVANCE from '../../../models/employee/advanceModel.js';
 
-async function updateAdvanceService(userId, employeeId, advanceId, advanceData, transaction) {
+async function updateAdvanceService(
+    userId,
+    employeeId,
+    advanceId,
+    advanceData,
+    transaction
+) {
     try {
         const updatedCount = await ADVANCE.update(advanceData, {
             where: {
                 UserId: userId,
                 employeeId,
-                id: advanceId,
+                id: advanceId
             },
-            transaction,
-        })
+            transaction
+        });
 
-        return updatedCount
+        return updatedCount;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default updateAdvanceService
+export default updateAdvanceService;

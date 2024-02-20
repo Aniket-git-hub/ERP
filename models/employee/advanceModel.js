@@ -10,20 +10,20 @@ const ADVANCE = sequelize.define('advance', {
     },
     date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
     description: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: false
     },
     amount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     remainingAmount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-    },
+        allowNull: false
+    }
 });
 
 export default ADVANCE;

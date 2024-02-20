@@ -3,8 +3,8 @@ import CustomError from '../utils/createError.js';
 import getEnvVariable from '../utils/env.js';
 
 function verifyJWT(req, res, next) {
-    let token
-    let secret
+    let token;
+    let secret;
 
     if (req.headers.authorization) {
         token = req.headers.authorization.split(' ')[1];
@@ -17,7 +17,7 @@ function verifyJWT(req, res, next) {
             const decoded = jwt.verify(token, secret);
             req.user = decoded;
         } else {
-            req.user = { userId: 1 }
+            req.user = { userId: 1 };
         }
         next();
     } catch (error) {

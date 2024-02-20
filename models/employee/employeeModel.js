@@ -47,24 +47,30 @@ const EMPLOYEE = sequelize.define('employee', {
         }
     },
     designation: {
-        type: DataTypes.ENUM('manager', 'supervisor', 'Milling Operator', 'Vertical Turret Milling Operator', 'Lathe Operator'),
-        allowNull: false,
+        type: DataTypes.ENUM(
+            'manager',
+            'supervisor',
+            'Milling Operator',
+            'Vertical Turret Milling Operator',
+            'Lathe Operator'
+        ),
+        allowNull: false
     },
     department: {
         type: DataTypes.ENUM('finance', 'factory', 'management'),
-        allowNull: false,
+        allowNull: false
     },
     salary: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     dateOfJoining: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
     isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        defaultValue: true
     }
 });
 

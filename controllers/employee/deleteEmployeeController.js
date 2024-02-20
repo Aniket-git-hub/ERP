@@ -1,16 +1,16 @@
-import deleteEmployeeService from "../../services/employees/deleteEmployeeService.js";
+import deleteEmployeeService from '../../services/employees/deleteEmployeeService.js';
 
 async function deleteEmployeeController(req, res, next) {
-    const { userId } = req.user
-    const { employeeId } = req.params
+    const { userId } = req.user;
+    const { employeeId } = req.params;
     try {
-        const deletedEmployee = await deleteEmployeeService(userId, employeeId)
+        const deletedEmployee = await deleteEmployeeService(userId, employeeId);
         res.json({
             deletedEmployee,
-            message: "Employee deleted successfully"
-        })
+            message: 'Employee deleted successfully'
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 export default deleteEmployeeController;

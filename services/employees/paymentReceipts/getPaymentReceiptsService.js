@@ -1,6 +1,6 @@
-import DEDUCTION from "../../../models/employee/deductionModel.js"
-import PAYMENT_RECEIPT from "../../../models/employee/paymentReceiptModel.js"
-import buildWhereClause from "../../../utils/buildWhereClause.js"
+import DEDUCTION from '../../../models/employee/deductionModel.js';
+import PAYMENT_RECEIPT from '../../../models/employee/paymentReceiptModel.js';
+import buildWhereClause from '../../../utils/buildWhereClause.js';
 
 async function getPaymentReceiptsService(userId, employeeId, filters, config) {
     try {
@@ -8,24 +8,24 @@ async function getPaymentReceiptsService(userId, employeeId, filters, config) {
             'date',
             'fromDate',
             'toDate'
-        ])
+        ]);
         const paymentReceipts = await PAYMENT_RECEIPT.findAll({
             where: {
                 UserId: userId,
                 employeeId,
-                ...whereClause,
+                ...whereClause
             },
             include: [
                 {
                     model: DEDUCTION,
-                    as: 'deductions',
+                    as: 'deductions'
                 }
             ]
-        })
-        return paymentReceipts
+        });
+        return paymentReceipts;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default getPaymentReceiptsService
+export default getPaymentReceiptsService;

@@ -1,7 +1,6 @@
-import ATTENDANCE from "../../../models/employee/attendanceModel.js"
+import ATTENDANCE from '../../../models/employee/attendanceModel.js';
 
 async function deleteAttendanceService(userId, employeeId, attendanceId) {
-
     try {
         const deletedAttendance = await ATTENDANCE.destroy({
             where: {
@@ -9,11 +8,11 @@ async function deleteAttendanceService(userId, employeeId, attendanceId) {
                 UserId: userId,
                 id: attendanceId
             }
-        })
-        return deletedAttendance
+        });
+        return deletedAttendance;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default deleteAttendanceService
+export default deleteAttendanceService;

@@ -1,5 +1,17 @@
 import JOB from '../../models/work/jobModel.js';
-async function addJobService(userId, drawingNumber, description, quantity, millingRate, drillingRate, date, size, clientId, materialId, imageUrl) {
+async function addJobService(
+    userId,
+    drawingNumber,
+    description,
+    quantity,
+    millingRate,
+    drillingRate,
+    date,
+    size,
+    clientId,
+    materialId,
+    imageUrl
+) {
     try {
         const job = await JOB.create({
             drawingNumber,
@@ -13,10 +25,10 @@ async function addJobService(userId, drawingNumber, description, quantity, milli
             UserId: userId,
             ClientId: clientId,
             MaterialId: materialId
-        })
-        return job
+        });
+        return job;
     } catch (err) {
-        throw err
+        throw err;
     }
 }
 

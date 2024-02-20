@@ -6,4 +6,4 @@ function formatDate(date) {
     }).format(date);
 }
 
-export default formatDate
+export default formatDate;

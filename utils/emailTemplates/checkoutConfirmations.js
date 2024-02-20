@@ -15,5 +15,5 @@ function checkoutConfirmationTemplate(username) {
         </div>
 
     </section>
-    `
+    `;
 }

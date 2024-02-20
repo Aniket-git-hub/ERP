@@ -7,7 +7,7 @@ import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
-// expense 
+// expense
 router.get('/', verifyJWT, getExpensesController);
 router.post('/', verifyJWT, createExpenseController);
 router.put('/:expenseId/', verifyJWT, updateExpenseController);

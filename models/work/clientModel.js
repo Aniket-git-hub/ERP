@@ -10,28 +10,27 @@ const CLIENT = sequelize.define('Client', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     email: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
+        unique: true
     },
     phone: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
+        unique: true
     },
     gst: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
+        unique: true
     },
     address: {
         type: DataTypes.STRING,
-        allowNull: true,
-    },
+        allowNull: true
+    }
 });
-
 
 export default CLIENT;

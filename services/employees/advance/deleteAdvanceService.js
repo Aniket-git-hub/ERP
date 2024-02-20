@@ -1,4 +1,4 @@
-import ADVANCE from "../../../models/employee/advanceModel.js"
+import ADVANCE from '../../../models/employee/advanceModel.js';
 
 async function deleteAdvanceService(userId, employeeId, advanceId) {
     try {
@@ -8,11 +8,11 @@ async function deleteAdvanceService(userId, employeeId, advanceId) {
                 employeeId,
                 id: advanceId
             }
-        })
-        return deletedAdvance
+        });
+        return deletedAdvance;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default deleteAdvanceService
+export default deleteAdvanceService;

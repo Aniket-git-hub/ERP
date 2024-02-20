@@ -1,4 +1,4 @@
-import { getTransactionService } from "../../services/budget/transactionService.js";
+import { getTransactionService } from '../../services/budget/transactionService.js';
 
 export async function getTransactionController(req, res, next) {
     const { userId } = req.user;
@@ -9,4 +9,3 @@ export async function getTransactionController(req, res, next) {
         next(error);
     }
 }
-

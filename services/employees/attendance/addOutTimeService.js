@@ -1,9 +1,13 @@
-import { Op } from "sequelize"
-import ATTENDANCE from "../../../models/employee/attendanceModel.js"
-import CustomError from "../../../utils/createError.js"
+import { Op } from 'sequelize';
+import ATTENDANCE from '../../../models/employee/attendanceModel.js';
+import CustomError from '../../../utils/createError.js';
 
-async function addOutTimeService(userId, employeeId, attendanceId, attendanceData) {
-
+async function addOutTimeService(
+    userId,
+    employeeId,
+    attendanceId,
+    attendanceData
+) {
     try {
         // const employee = await ATTENDANCE.findByPk(attendanceId, {
         //     where: {
@@ -29,14 +33,14 @@ async function addOutTimeService(userId, employeeId, attendanceId, attendanceDat
                 },
                 outTime: null
             }
-        })
+        });
         if (attendance[0] === 0) {
-            throw new CustomError("AttendanceError", "Couldn't update")
+            throw new CustomError('AttendanceError', "Couldn't update");
         }
-        return attendance
+        return attendance;
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
-export default addOutTimeService
+export default addOutTimeService;

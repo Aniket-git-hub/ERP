@@ -6,8 +6,8 @@ async function updateIncomeService(userId, incomeId, newData) {
         const [updatedRowsCount] = await INCOME.update(newData, {
             where: {
                 id: incomeId,
-                UserId: userId,
-            },
+                UserId: userId
+            }
         });
 
         if (updatedRowsCount === 0) {
@@ -21,4 +21,4 @@ async function updateIncomeService(userId, incomeId, newData) {
     }
 }
 
-export default updateIncomeService
+export default updateIncomeService;

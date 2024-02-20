@@ -1,8 +1,8 @@
 import express from 'express';
-import addMaterialController from "../controllers/material/addMaterialController.js";
-import deleteMaterialController from "../controllers/material/deleteMaterialController.js";
-import getMaterialController from "../controllers/material/getMaterialController.js";
-import updateMaterialController from "../controllers/material/updateMaterialController.js";
+import addMaterialController from '../controllers/material/addMaterialController.js';
+import deleteMaterialController from '../controllers/material/deleteMaterialController.js';
+import getMaterialController from '../controllers/material/getMaterialController.js';
+import updateMaterialController from '../controllers/material/updateMaterialController.js';
 import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
