@@ -107,7 +107,7 @@ async function createPaymentReceiptService(
 
         const paymentReceipt = await PAYMENT_RECEIPT.create(
             {
-                UserId: userId,
+                userId,
                 employeeId: employeeId,
                 amount:
                     deductionAmount && deductionAmount > 0

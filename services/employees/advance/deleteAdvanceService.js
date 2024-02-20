@@ -4,7 +4,7 @@ async function deleteAdvanceService(userId, employeeId, advanceId) {
     try {
         const deletedAdvance = await ADVANCE.destroy({
             where: {
-                UserId: userId,
+                userId,
                 employeeId,
                 id: advanceId
             }

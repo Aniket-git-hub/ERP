@@ -5,7 +5,7 @@ export async function createExpenseCategoryService(userId, name) {
     try {
         const expenseCategory = await EXPENSE_CATEGORY.create({
             name,
-            UserId: userId
+            userId
         });
         return expenseCategory;
     } catch (error) {
@@ -23,7 +23,7 @@ export async function updateExpenseCategoryService(
             expenseCategoryId,
             {
                 where: {
-                    UserId: userId
+                    userId
                 }
             }
         );
@@ -47,7 +47,7 @@ export async function deleteExpenseCategoryService(userId, expenseCategoryId) {
             expenseCategoryId,
             {
                 where: {
-                    UserId: userId
+                    userId
                 }
             }
         );
@@ -67,7 +67,7 @@ export async function getExpenseCategoriesService(userId) {
     try {
         const expenseCategories = await EXPENSE_CATEGORY.findAll({
             where: {
-                UserId: userId
+                userId
             }
         });
 

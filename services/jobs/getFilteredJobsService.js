@@ -12,9 +12,9 @@ async function getFilteredJobsService(
 ) {
     const offset = (page - 1) * (limit || 10);
     const whereClause = buildWhereClause(filters, [
-        'ClientId',
-        'MaterialId',
-        'InvoiceId',
+        'clientId',
+        'materialId',
+        'invoiceId',
         'quantity',
         'drawingName',
         'date',
@@ -28,7 +28,7 @@ async function getFilteredJobsService(
     if (filters.pdf) {
         excludedFields = [
             'id',
-            'InvoiceId',
+            'invoiceId',
             'imageUrl',
             'createdAt',
             'updatedAt',
@@ -42,7 +42,7 @@ async function getFilteredJobsService(
             offset,
             limit: limit || undefined,
             where: {
-                UserId: userId,
+                userId,
                 ...whereClause
             },
             order: [['date', 'DESC']],

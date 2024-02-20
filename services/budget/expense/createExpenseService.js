@@ -16,7 +16,7 @@ async function createExpenseService(
                 description,
                 amount,
                 date,
-                UserId: userId,
+                userId,
                 expenseCategoryId: expenseCategory
             },
             { transaction }

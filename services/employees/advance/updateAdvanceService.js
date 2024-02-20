@@ -10,7 +10,7 @@ async function updateAdvanceService(
     try {
         const updatedCount = await ADVANCE.update(advanceData, {
             where: {
-                UserId: userId,
+                userId,
                 employeeId,
                 id: advanceId
             },

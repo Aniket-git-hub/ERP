@@ -6,7 +6,7 @@ async function updateIncomeService(userId, incomeId, newData) {
         const [updatedRowsCount] = await INCOME.update(newData, {
             where: {
                 id: incomeId,
-                UserId: userId
+                userId
             }
         });
 
@@ -14,7 +14,7 @@ async function updateIncomeService(userId, incomeId, newData) {
             throw new CustomError('IncomeError', 'Income not found');
         }
 
-        const updatedIncome = await INCOME.findByPk(incomeId);
+        const updatedIncome = await INCOME.findByPk(incomeId, { where: { userId } });
         return updatedIncome;
     } catch (error) {
         throw error;

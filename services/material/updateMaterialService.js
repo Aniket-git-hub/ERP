@@ -12,7 +12,7 @@ async function updateMaterialService(
         const updatedMaterial = await MATERIAL.update(
             { name, hardness, density },
             {
-                where: { id: materialId, UserId: userId },
+                where: { id: materialId, userId },
                 returning: true,
                 plain: true
             }

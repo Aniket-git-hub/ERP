@@ -4,7 +4,7 @@ import CustomError from '../../utils/createError.js';
 async function updateEmployeeService(userId, employeeId, employeeData) {
     try {
         const employee = await EMPLOYEE.findOne({
-            where: { id: employeeId, UserId: userId }
+            where: { id: employeeId, userId }
         });
 
         if (!employee) {
@@ -14,7 +14,7 @@ async function updateEmployeeService(userId, employeeId, employeeData) {
         const updatedEmployee = await EMPLOYEE.update(
             { ...employeeData },
             {
-                where: { id: employeeId, UserId: userId }
+                where: { id: employeeId, userId }
             }
         );
 

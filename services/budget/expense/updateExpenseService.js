@@ -5,7 +5,7 @@ async function updateExpenseService(userId, expenseId, newData) {
         const [updatedRowsCount] = await EXPENSE.update(newData, {
             where: {
                 id: expenseId,
-                UserId: userId
+                userId
             }
         });
 
@@ -13,7 +13,7 @@ async function updateExpenseService(userId, expenseId, newData) {
             throw new Error('Expense not found');
         }
 
-        const updatedExpense = await EXPENSE.findByPk(expenseId);
+        const updatedExpense = await EXPENSE.findByPk(expenseId, { where: { userId } });
         return updatedExpense;
     } catch (error) {
         throw error;

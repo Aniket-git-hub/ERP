@@ -3,7 +3,7 @@ import CustomError from '../../utils/createError.js';
 async function deleteJobService(userId, jobId) {
     try {
         const deletedJob = await JOB.destroy({
-            where: { id: jobId, UserId: userId }
+            where: { id: jobId, userId }
         });
 
         if (!deletedJob) {

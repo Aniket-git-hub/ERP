@@ -13,7 +13,7 @@ export async function createTransactionService(
     try {
         const t = await TRANSACTIONS.create(
             {
-                UserId: userId,
+                userId,
                 type,
                 amount,
                 date,
@@ -33,7 +33,7 @@ export async function updateTransactionService(userId, transactionId, newData) {
         const [updatedRowsCount] = await TRANSACTIONS.update(newData, {
             where: {
                 id: transactionId,
-                UserId: userId
+                userId
             }
         });
 
@@ -43,7 +43,7 @@ export async function updateTransactionService(userId, transactionId, newData) {
 
         const updatedTransaction = await TRANSACTIONS.findByPk(transactionId, {
             where: {
-                UserId: userId
+                userId
             }
         });
         return updatedTransaction;
@@ -56,7 +56,7 @@ export async function getTransactionService(userId) {
     try {
         const transaction = await TRANSACTIONS.findAll({
             where: {
-                UserId: userId
+                userId
             }
         });
 
@@ -70,7 +70,7 @@ export async function deleteTransactionService(userId, transactionId) {
     try {
         const transaction = await TRANSACTIONS.findByPk(transactionId, {
             where: {
-                UserId: userId
+                userId
             }
         });
 

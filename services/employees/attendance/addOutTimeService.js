@@ -27,7 +27,7 @@ async function addOutTimeService(
             where: {
                 id: attendanceId,
                 employeeId,
-                UserId: userId,
+                userId,
                 inTime: {
                     [Op.not]: null
                 },

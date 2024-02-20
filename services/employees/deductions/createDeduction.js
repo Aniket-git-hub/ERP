@@ -11,7 +11,7 @@ async function createDeductionService(
     try {
         const deduction = await DEDUCTION.create(
             {
-                UserId: userId,
+                userId,
                 employeeId,
                 amountDeducted: amount,
                 date,

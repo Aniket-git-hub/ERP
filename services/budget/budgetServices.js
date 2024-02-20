@@ -9,7 +9,7 @@ export async function createBudgetService(
 ) {
     try {
         const budget = await BUDGET.create({
-            UserId: userId,
+            userId,
             amount,
             date,
             expenseCategoryId: expenseCategory
@@ -25,7 +25,7 @@ export async function updateBudgetService(userId, budgetId, newData) {
         const [updatedRowsCount] = await BUDGET.update(newData, {
             where: {
                 id: budgetId,
-                UserId: userId
+                userId
             }
         });
 
@@ -35,7 +35,7 @@ export async function updateBudgetService(userId, budgetId, newData) {
 
         const updatedBudget = await BUDGET.findByPk(budgetId, {
             where: {
-                UserId: userId
+                userId
             }
         });
         return updatedBudget;
@@ -48,7 +48,7 @@ export async function deleteBudgetService(userId, budgetId) {
     try {
         const budget = await BUDGET.findByPk(budgetId, {
             where: {
-                UserId: userId
+                userId
             }
         });
 
@@ -66,7 +66,7 @@ export async function deleteBudgetService(userId, budgetId) {
 export async function getBudgetService(userId) {
     try {
         const budget = await BUDGET.findAll({
-            where: { UserId: userId }
+            where: { userId }
         });
 
         return budget;

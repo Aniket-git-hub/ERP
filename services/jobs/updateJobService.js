@@ -29,7 +29,7 @@ async function updateJobService(
                 imageUrl
             },
             {
-                where: { id: jobId, UserId: userId },
+                where: { id: jobId, userId },
                 returning: true,
                 plain: true
             }

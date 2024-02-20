@@ -7,7 +7,7 @@ async function getAttendanceService(userId, employeeId, date) {
         const { firstDay, lastDay } = getMonthRange(date);
         const attendance = await ATTENDANCE.findAll({
             where: {
-                UserId: userId,
+                userId,
                 employeeId,
                 date: {
                     [Op.between]: [firstDay, lastDay]
