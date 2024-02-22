@@ -9,7 +9,7 @@ async function addOutTimeController(req, res, next) {
             userId,
             employeeId,
             attendanceId,
-            req.body
+            req.body.outTime
         );
         res.json({
             attendance,

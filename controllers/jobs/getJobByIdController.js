@@ -4,6 +4,11 @@ async function getJobsController(req, res, next) {
     const { userId } = req.user;
     try {
         let job = await getJobByIdService(userId, jobId);
+
+        if (!job) {
+            return res.status(404).json({ message: 'Job not found' });
+        }
+
         res.json({
             job
         });

@@ -1,15 +1,22 @@
 import ATTENDANCE from '../../../models/employee/attendanceModel.js';
+import CustomError from '../../../utils/createError.js';
 
 async function deleteAttendanceService(userId, employeeId, attendanceId) {
     try {
-        const deletedAttendance = await ATTENDANCE.destroy({
+        const attendance = await ATTENDANCE.findByPk(attendanceId, {
             where: {
                 employeeId,
                 userId,
-                id: attendanceId
             }
         });
-        return deletedAttendance;
+
+        if (!attendance) {
+            throw new CustomError('AttendanceError', 'Attendance Not found')
+        }
+
+        await attendance.destroy();
+
+        return true;
     } catch (error) {
         throw error;
     }

@@ -1,18 +1,12 @@
 import CLIENT from '../../models/work/clientModel.js';
-import buildWhereClause from '../../utils/buildWhereClause.js';
 
-async function getFilteredClientsService(userId, page = 1, limit = 10, filters = {}) {
+async function getFilteredClientsService(userId, page = 1, limit = 10) {
     const offset = (page - 1) * limit;
-    const whereClause = buildWhereClause(
-        filters,
-        ['name', 'email', 'gst', 'phone', 'createdAt', 'updatedAt'],
-        'createdAt'
-    );
     try {
         const items = await CLIENT.findAndCountAll({
             offset,
             limit,
-            where: { userId, ...whereClause },
+            where: { userId },
             order: [['createdAt', 'DESC']]
         });
 

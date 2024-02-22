@@ -4,7 +4,7 @@ async function addInTimeController(req, res, next) {
     const { userId } = req.user;
     const { employeeId } = req.params;
     try {
-        const attendance = await addInTimeService(userId, employeeId, req.body);
+        const attendance = await addInTimeService(userId, parseInt(employeeId), req.body.date, req.body.inTime);
         res.json({
             attendance,
             message: 'Attendance added successfully'
