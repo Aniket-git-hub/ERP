@@ -1,5 +1,5 @@
 import express from 'express';
-import createIncomeController from '../controllers/budget/income/addIncomeController.js';
+import createIncomeController from '../controllers/budget/income/createIncomeController.js';
 import deleteIncomeController from '../controllers/budget/income/deleteIncomeController.js';
 import getIncomeController from '../controllers/budget/income/getIncomeController.js';
 import updateIncomeController from '../controllers/budget/income/updateIncomeController.js';
