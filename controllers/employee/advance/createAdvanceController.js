@@ -7,7 +7,7 @@ async function createAdvanceController(req, res, next) {
     try {
         const advance = await createAdvanceService(
             userId,
-            employeeId,
+            parseInt(employeeId),
             date,
             amount,
             description

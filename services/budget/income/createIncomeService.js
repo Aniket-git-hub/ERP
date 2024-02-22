@@ -22,7 +22,7 @@ async function createIncomeService(
         );
 
         if (invoiceIds && invoiceIds.length > 0) {
-            await INCOME.addInvoices(invoiceIds, { transaction });
+            await INCOME.addInvoice(invoiceIds, { transaction });
         }
         if (scrapSellIds && scrapSellIds.length > 0) {
             await INCOME.addScrapSell(scrapSellIds, { transaction });
