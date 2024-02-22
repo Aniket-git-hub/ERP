@@ -3,6 +3,10 @@ import { Op } from 'sequelize';
 function buildWhereClause(filters, keys, dateField = 'date') {
     const whereClause = {};
 
+    if (Object.keys(filters).length === 0) {
+        return null;
+    }
+
     keys.forEach((key) => {
         if (filters[key] && key !== 'fromDate' && key !== 'toDate') {
             whereClause[key] =

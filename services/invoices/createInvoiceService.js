@@ -32,7 +32,7 @@ async function createInvoiceService(
                         Sequelize.fn(
                             'sum',
                             Sequelize.literal(
-                                '(quantity * (millingRate + drillingRate))'
+                                'COALESCE((quantity * COALESCE(millingRate, 0) + quantity * COALESCE(drillingRate, 0)), 0)'
                             )
                         ),
                         'totalAmount'
@@ -40,7 +40,6 @@ async function createInvoiceService(
                 ],
                 raw: true
             });
-
             totalAmountBeforeTax = parseFloat(jobs[0].totalAmount);
             totalQuantityBilled = parseInt(jobs[0].totalQuantity);
         }

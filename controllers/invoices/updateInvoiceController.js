@@ -5,10 +5,10 @@ async function updateInvoiceController(req, res, next) {
     const updatedFields = req.body;
     const { userId } = req.user;
     try {
-        await updateInvoiceService(userId, invoiceId, updatedFields);
+        const invoice = await updateInvoiceService(userId, invoiceId, updatedFields);
         res.json({
+            invoice,
             message: ' Invoice updated successfully',
-            success: true
         });
     } catch (error) {
         next(error);

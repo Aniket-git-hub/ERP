@@ -2,10 +2,15 @@ import getClientByIdService from '../../services/clients/getClientByIdService.js
 
 async function getClientController(req, res, next) {
     const { clientId } = req.params;
+    const { userId } = req.user
     try {
-        const clients = await getClientByIdService(clientId);
+        const client = await getClientByIdService(userId, clientId);
+        if (!client) {
+            return res.status(404).json({ message: 'No Client found' });
+        }
+
         res.json({
-            clients
+            client,
         });
     } catch (error) {
         next(error);

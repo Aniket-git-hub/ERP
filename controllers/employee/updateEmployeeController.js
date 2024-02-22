@@ -4,13 +4,13 @@ async function updateEmployeeController(req, res, next) {
     const { employeeId } = req.params;
     const { userId } = req.user;
     try {
-        const updatedEmployee = await updateEmployeeService(
+        const employee = await updateEmployeeService(
             userId,
             employeeId,
             req.body
         );
         res.json({
-            updatedEmployee,
+            employee,
             message: 'Employee updated successfully'
         });
     } catch (error) {

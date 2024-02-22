@@ -4,9 +4,10 @@ async function updateClientController(req, res, next) {
     const clientData = req.body;
     const { userId } = req.user;
     try {
-        await updateClientService(userId, clientId, clientData);
+        const client = await updateClientService(userId, clientId, clientData);
         res.json({
-            message: 'client updated'
+            client,
+            message: 'Client Updated Successfully'
         });
     } catch (error) {
         next(error);
