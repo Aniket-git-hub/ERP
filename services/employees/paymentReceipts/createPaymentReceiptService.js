@@ -1,5 +1,6 @@
 import sequelize from '../../../config/database.js';
 import PAYMENT_RECEIPT from '../../../models/employee/paymentReceiptModel.js';
+import getMonthAndYear from '../../../utils/getMonthAndYear.js';
 import { getMonthRange } from '../../../utils/getMonthRage.js';
 import getAdvanceService from '../advance/getAdvanceService.js';
 import updateAdvanceService from '../advance/updateAdvanceService.js';
@@ -27,6 +28,8 @@ async function createPaymentReceiptService(
             firstDay,
             lastDay
         );
+        const { month, year } = getMonthAndYear(attendanceMonthDate);
+
         const {
             totalHoursWorked,
             overtime,
@@ -34,9 +37,11 @@ async function createPaymentReceiptService(
         } = await getAggregateAttendanceService(
             userId,
             employeeId,
-            firstDay,
-            lastDay
+            month,
+            year
         );
+
+
         const totalSalaryAmount = totalHoursWorked * (salary / 8);
         let totalDeductionAmount = deductionAmount;
         let deductions = [];

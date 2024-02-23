@@ -1,6 +1,7 @@
 import express from 'express';
 import addJobController from '../controllers/jobs/addJobsController.js';
 import deleteJobController from '../controllers/jobs/deleteJobsController.js';
+import getAggregateJobController from '../controllers/jobs/getAggregateJobController.js';
 import getJobByIdController from '../controllers/jobs/getJobByIdController.js';
 import getJobsByIdsController from '../controllers/jobs/getJobsByIdsController.js';
 import getJobController from '../controllers/jobs/getJobsController.js';
@@ -9,6 +10,7 @@ import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
+router.get('/aggregate', verifyJWT, getAggregateJobController);
 router.get('/id/:jobId', verifyJWT, getJobByIdController);
 router.get('/', verifyJWT, getJobController);
 router.get('/ids', verifyJWT, getJobsByIdsController);

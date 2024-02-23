@@ -1,24 +1,21 @@
 import getAggregateAttendanceService from '../../../services/employees/attendance/getAggregateAttendanceService.js';
-import { getMonthRange } from '../../../utils/getMonthRage.js';
 
-async function getAggregateAttendanceByMonth(req, res, next) {
+async function getAggregateAttendanceController(req, res, next) {
     const { userId } = req.user;
+    const { month, year } = req.query;
     const { employeeId } = req.params;
-    const { date } = req.query;
     try {
-        const { firstDay, lastDay } = getMonthRange(date);
         const aggregate = await getAggregateAttendanceService(
             userId,
             employeeId,
-            firstDay,
-            lastDay
+            parseInt(year),
+            parseInt(month),
         );
-        res.json({
-            aggregate
-        });
+        res.json(aggregate);
+
     } catch (error) {
         next(error);
     }
 }
 
-export default getAggregateAttendanceByMonth;
+export default getAggregateAttendanceController;
