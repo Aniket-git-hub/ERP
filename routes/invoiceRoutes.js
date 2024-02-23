@@ -2,6 +2,7 @@ import express from 'express';
 import createInvoiceController from '../controllers/invoices/createInvoiceController.js';
 import deleteInvoiceController from '../controllers/invoices/deleteInvoiceController.js';
 import generateInvoicePdfController from '../controllers/invoices/generateInvoicePdfController.js';
+import getAggregateInvoiceController from '../controllers/invoices/getAggregateInvoiceController.js';
 import getFilteredInvoiceController from '../controllers/invoices/getFilteredInvoiceController.js';
 import getInvoiceByIdController from '../controllers/invoices/getInvoiceByIdController.js';
 import updateInvoiceController from '../controllers/invoices/updateInvoiceController.js';
@@ -9,6 +10,7 @@ import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
+router.get('/aggregate', verifyJWT, getAggregateInvoiceController)
 router.get('/:invoiceId', verifyJWT, getInvoiceByIdController);
 router.get('/', verifyJWT, getFilteredInvoiceController);
 router.get('/generatePdf/:invoiceId', verifyJWT, generateInvoicePdfController);

@@ -2,7 +2,7 @@ import express from 'express';
 import addInTimeController from '../controllers/employee/attendance/addInTimeController.js';
 import addOutTimeController from '../controllers/employee/attendance/addOutTimeController.js';
 import deleteAttendance from '../controllers/employee/attendance/deleteAttendanceController.js';
-import getAggregateAttendanceByMonth from '../controllers/employee/attendance/getAggregateAttendanceByMonthController.js';
+import getAggregateAttendanceByMonth from '../controllers/employee/attendance/getAggregateAttendanceController.js';
 import getAttendanceByMonthController from '../controllers/employee/attendance/getAttendanceByMonthController.js';
 import verifyJWT from '../middleware/verifyJWT.js';
 
