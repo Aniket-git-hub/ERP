@@ -4,12 +4,14 @@ import deleteEmployeeController from '../controllers/employee/deleteEmployeeCont
 import getAggregateEmployeeController from '../controllers/employee/getAggregateEmployeeController.js';
 import getEmployeesByIdController from '../controllers/employee/getEmployeeByIdController.js';
 import getEmployeesController from '../controllers/employee/getEmployeesController.js';
+import getEmployeesOptionController from '../controllers/employee/getEmployeesOptionController.js';
 import updateEmployeeController from '../controllers/employee/updateEmployeeController.js';
 import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
 router.get('/aggregate', verifyJWT, getAggregateEmployeeController);
+router.get('/options', verifyJWT, getEmployeesOptionController);
 router.get('/', verifyJWT, getEmployeesController);
 router.get('/:employeeId', verifyJWT, getEmployeesByIdController);
 router.post('/', verifyJWT, addEmployeeController);

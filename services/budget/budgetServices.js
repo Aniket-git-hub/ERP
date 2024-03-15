@@ -1,4 +1,5 @@
 import BUDGET from '../../models/budget/budgetModel.js';
+import EXPENSE_CATEGORY from '../../models/budget/expenseCategoryModel.js';
 import CustomError from '../../utils/createError.js';
 
 export async function createBudgetService(
@@ -66,7 +67,15 @@ export async function deleteBudgetService(userId, budgetId) {
 export async function getBudgetService(userId) {
     try {
         const budget = await BUDGET.findAll({
-            where: { userId }
+            where: { userId },
+            include: [
+                {
+                    model: EXPENSE_CATEGORY
+                }
+            ],
+            attribute: {
+                exclude: ['expenseCategoryId']
+            }
         });
 
         return budget;

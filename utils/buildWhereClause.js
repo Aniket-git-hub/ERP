@@ -1,6 +1,14 @@
 import { Op } from 'sequelize';
 
-function buildWhereClause(filters, keys, dateField = 'date') {
+const operatorMapping = {
+    'eq': Op.eq,
+    'ne': Op.ne,
+    'gt': Op.gt,
+    'lt': Op.lt
+    // Add more operators as needed
+};
+
+function buildWhereClause(filters, keys, operators = {}, dateField = 'date') {
     const whereClause = {};
 
     if (Object.keys(filters).length === 0) {
@@ -9,10 +17,10 @@ function buildWhereClause(filters, keys, dateField = 'date') {
 
     keys.forEach((key) => {
         if (filters[key] && key !== 'fromDate' && key !== 'toDate') {
-            whereClause[key] =
-                filters[key] instanceof Date
-                    ? new Date(filters[key])
-                    : filters[key];
+            const operator = operatorMapping[operators[key]] || Op.eq; // Use the provided operator or default to Op.eq
+            whereClause[key] = {
+                [operator]: filters[key] instanceof Date ? new Date(filters[key]) : filters[key]
+            };
         }
     });
 
