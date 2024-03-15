@@ -2,15 +2,14 @@ import getAdvanceService from "../../../services/employees/advance/getAdvanceSer
 
 async function getAdvanceController(req, res, next) {
     const { userId } = req.user;
-    const { employeeId } = req.params;
+    const { operators, ...filters } = req.query;
     try {
-        const advances = await getAdvanceService(userId, parseInt(employeeId), {})
+        const advances = await getAdvanceService(userId, filters, operators);
         res.json({
             advances,
-        })
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
-
 export default getAdvanceController;

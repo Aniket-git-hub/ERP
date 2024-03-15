@@ -45,10 +45,9 @@ async function getFilteredInvoiceService(
 
         const { count: totalItems, rows: itemData } = items;
         const totalPages = Math.ceil(totalItems / limit);
-
         const jobs = itemData.map((item) => ({
             ...item.get(),
-            Jobs: item.Jobs.map((job) => job.id)
+            Jobs: item?.Jobs?.map((job) => job.id)
         }));
 
         return {

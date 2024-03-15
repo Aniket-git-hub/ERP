@@ -6,7 +6,7 @@ import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
-router.get('/:employeeId', verifyJWT, getAdvanceController);
+router.get('/', verifyJWT, getAdvanceController);
 router.post('/:employeeId', verifyJWT, createAdvanceController);
 router.delete('/:employeeId/:advanceId', verifyJWT, deleteAdvanceController);
 

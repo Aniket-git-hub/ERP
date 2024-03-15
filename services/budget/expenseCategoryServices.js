@@ -68,7 +68,13 @@ export async function getExpenseCategoriesService(userId) {
         const expenseCategories = await EXPENSE_CATEGORY.findAll({
             where: {
                 userId
-            }
+            },
+            attributes: [
+                ['id', 'value'],
+                ['id', 'Id'],
+                ['name', 'label'],
+                ['name', 'name']
+            ]
         });
 
         return expenseCategories;

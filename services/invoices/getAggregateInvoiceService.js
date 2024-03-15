@@ -59,7 +59,7 @@ async function getAggregateInvoiceService(userId, type, year, month) {
             order: [[Sequelize.col('totalAmountAfterTax'), 'DESC']]
         });
 
-        // Monthly data for invoices over the year
+        // Monthly data for`` invoices over the year
         const monthlyInvoiceData = await INVOICE.findAll({
             where: whereCondition,
             attributes: [
