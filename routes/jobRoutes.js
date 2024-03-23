@@ -5,6 +5,7 @@ import getAggregateJobController from '../controllers/jobs/getAggregateJobContro
 import getJobByIdController from '../controllers/jobs/getJobByIdController.js';
 import getJobsByIdsController from '../controllers/jobs/getJobsByIdsController.js';
 import getJobController from '../controllers/jobs/getJobsController.js';
+import { addOperationController, deleteOperationController, getAllOperationsController, getOperationByIdController, updateOperationController } from '../controllers/jobs/operations/operationController.js';
 import updateJobController from '../controllers/jobs/updateJobsController.js';
 import verifyJWT from '../middleware/verifyJWT.js';
 
@@ -17,5 +18,11 @@ router.get('/ids', verifyJWT, getJobsByIdsController);
 router.post('/', verifyJWT, addJobController);
 router.put('/:jobId', verifyJWT, updateJobController);
 router.delete('/:jobId', verifyJWT, deleteJobController);
+
+router.get('/operations', verifyJWT, getAllOperationsController);
+router.get('/operations/:operationId', verifyJWT, getOperationByIdController);
+router.post('/operations', verifyJWT, addOperationController);
+router.put('/operations/:operationId', verifyJWT, updateOperationController);
+router.delete('/operations/:operationId', verifyJWT, deleteOperationController);
 
 export default router;

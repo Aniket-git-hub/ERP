@@ -4,28 +4,29 @@ async function addJobService(
     drawingNumber,
     description,
     quantity,
-    millingRate,
-    drillingRate,
     date,
     size,
     clientId,
     materialId,
-    imageUrl
+    imageUrl,
+    operations,
 ) {
     try {
         const job = await JOB.create({
             drawingNumber,
             description,
             quantity,
-            millingRate,
-            drillingRate,
             date,
             size,
             imageUrl,
             userId,
             clientId,
-            materialId
+            materialId,
         });
+
+        if (operations && operations.length > 0) {
+
+        }
         return job;
     } catch (err) {
         throw err;

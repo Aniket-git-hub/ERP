@@ -1,16 +1,16 @@
 import addJobService from '../../services/jobs/addJobService.js';
+
 async function addJobController(req, res, next) {
     const {
         drawingNumber,
         description,
         quantity,
-        millingRate,
-        drillingRate,
         size,
         clientId,
         materialId,
         date,
-        imageUrl
+        imageUrl,
+        operations
     } = req.body;
     const { userId } = req.user;
     try {
@@ -19,13 +19,12 @@ async function addJobController(req, res, next) {
             drawingNumber,
             description,
             quantity,
-            millingRate,
-            drillingRate,
             date,
             size,
             clientId,
             materialId,
-            imageUrl
+            imageUrl,
+            operations
         );
         res.status(201).json({
             job,

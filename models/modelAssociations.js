@@ -14,6 +14,8 @@ import DELIVERY_CHALLAN from './work/deliveryChallanModel.js';
 import INVOICE from './work/invoiceModel.js';
 import JOB from './work/jobModel.js';
 import MATERIAL from './work/materialModel.js';
+import OPERATION_COST from './work/operationCostModel.js';
+import OPERATIONS from './work/operationModel.js';
 import USER from './work/userModel.js';
 
 function setupAssociations() {
@@ -23,10 +25,16 @@ function setupAssociations() {
     USER.hasMany(MATERIAL);
     USER.hasMany(INVOICE);
     USER.hasMany(DELIVERY_CHALLAN);
+    USER.hasMany(OPERATIONS)
+    USER.hasMany(OPERATION_COST)
     MATERIAL.hasMany(JOB);
     JOB.belongsTo(MATERIAL);
     CLIENT.hasMany(JOB);
     JOB.belongsTo(CLIENT);
+    JOB.hasMany(OPERATIONS)
+    OPERATIONS.belongsTo(JOB)
+    JOB.hasMany(OPERATION_COST)
+    OPERATION_COST.belongsTo(JOB)
     CLIENT.hasMany(INVOICE);
     INVOICE.belongsTo(CLIENT);
     INVOICE.hasMany(JOB);
