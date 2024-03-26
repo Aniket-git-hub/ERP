@@ -48,14 +48,7 @@ async function getAggregateJobService(userId, type, year, month) {
                 order: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'ASC']],
                 limit: 1
             }),
-            JOB.findAll({
-                where: whereCondition,
-                attributes: [
-                    [Sequelize.fn('max', Sequelize.literal('COALESCE((quantity * COALESCE(millingRate, 0) + quantity * COALESCE(drillingRate, 0)), 0)')), 'maxRate'],
-                    [Sequelize.fn('min', Sequelize.literal('COALESCE((quantity * COALESCE(millingRate, 0) + quantity * COALESCE(drillingRate, 0)), 0)')), 'minRate'],
-                    [Sequelize.fn('avg', Sequelize.literal('COALESCE((quantity * COALESCE(millingRate, 0) + quantity * COALESCE(drillingRate, 0)), 0)')), 'avgRate']
-                ]
-            })
+            getRateStats(userId, type, year, month)
         ]);
 
         return {
@@ -65,7 +58,7 @@ async function getAggregateJobService(userId, type, year, month) {
             jobsPerMaterial,
             maxJobs,
             minJobs,
-            rateStats
+            rateStats: rateStats ? rateStats : { min: 0, max: 0, min: 0 }
         };
 
     } catch (error) {
@@ -74,3 +67,42 @@ async function getAggregateJobService(userId, type, year, month) {
 }
 
 export default getAggregateJobService;
+
+
+async function getRateStats(userId, type, year, month) {
+    try {
+        // Fetch jobs with associated operation costs and calculate total price in the database
+        const jobs = await JOB.findAll({
+            where: {
+                userId: userId,
+                createdAt: {
+                    [Op.gte]: new Date(year, month - 1, 1),
+                    [Op.lt]: new Date(year, month, 1)
+                }
+            },
+            attributes: [
+                'id',
+                ['quantity', 'qty'],
+                [Sequelize.literal('`Job`.`quantity` * (SELECT SUM(`cost`) FROM `operation_costs` WHERE `operation_costs`.`jobId` = `Job`.`id`)'), 'totalPrice']
+            ]
+        });
+
+
+        // Extract total prices from jobs
+        const totalPrices = jobs?.map(job => parseFloat(job.getDataValue('totalPrice')));
+
+        // Calculate rate statistics
+        const max = Math.max(...totalPrices);
+        const min = Math.min(...totalPrices);
+        const avg = totalPrices.reduce((acc, price) => acc + price, 0) / totalPrices.length;
+
+        return {
+            max,
+            min,
+            avg
+        };
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

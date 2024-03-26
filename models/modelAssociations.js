@@ -31,10 +31,12 @@ function setupAssociations() {
     JOB.belongsTo(MATERIAL);
     CLIENT.hasMany(JOB);
     JOB.belongsTo(CLIENT);
-    JOB.hasMany(OPERATIONS)
-    OPERATIONS.belongsTo(JOB)
-    JOB.hasMany(OPERATION_COST)
-    OPERATION_COST.belongsTo(JOB)
+    JOB.belongsToMany(OPERATIONS, { through: 'JobOperation' });
+    OPERATIONS.belongsToMany(JOB, { through: 'JobOperation' });
+    JOB.hasMany(OPERATION_COST);
+    OPERATION_COST.belongsTo(JOB);
+    OPERATIONS.hasMany(OPERATION_COST);
+    OPERATION_COST.belongsTo(OPERATIONS);
     CLIENT.hasMany(INVOICE);
     INVOICE.belongsTo(CLIENT);
     INVOICE.hasMany(JOB);

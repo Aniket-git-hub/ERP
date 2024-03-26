@@ -7,7 +7,7 @@ const sequelize = new Sequelize({
     password: getEnvVariable('DB_PASSWORD'),
     host: getEnvVariable('DB_HOST'),
     dialect: 'mysql',
-    logging: false
+    logging: true
 });
 
 export default sequelize;

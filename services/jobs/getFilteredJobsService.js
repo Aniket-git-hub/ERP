@@ -2,6 +2,8 @@ import { Sequelize } from 'sequelize';
 import CLIENT from '../../models/work/clientModel.js';
 import JOB from '../../models/work/jobModel.js';
 import MATERIAL from '../../models/work/materialModel.js';
+import OPERATION_COST from '../../models/work/operationCostModel.js';
+import OPERATIONS from '../../models/work/operationModel.js';
 import buildWhereClause from '../../utils/buildWhereClause.js';
 
 async function getFilteredJobsService(
@@ -38,7 +40,12 @@ async function getFilteredJobsService(
     }
 
     try {
-        const items = await JOB.findAndCountAll({
+
+        const totalItems = await JOB.count({
+            where: { userId }
+        });
+
+        const items = await JOB.findAll({
             offset,
             limit: limit || undefined,
             where: {
@@ -61,17 +68,35 @@ async function getFilteredJobsService(
                 {
                     model: MATERIAL,
                     attributes: ['id', 'name', 'hardness', 'density']
+                },
+                {
+                    model: OPERATIONS,
+                    attributes: ['name'],
+                    through: {
+                        attributes: [],
+                    },
+                },
+                {
+                    model: OPERATION_COST,
+                    attributes: ['cost'],
                 }
+
             ],
             attributes: {
                 include: [
                     ['quantity', 'qty'],
                     [
                         Sequelize.literal(
-                            '`Job`.`quantity` * (`Job`.`millingRate` + `Job`.`drillingRate`)'
+                            '`Job`.`quantity` * (SELECT SUM(`cost`) FROM `operation_costs` WHERE `operation_costs`.`jobId` = `Job`.`id`)'
                         ),
                         'total'
-                    ]
+                    ],
+                    // [
+                    //     Sequelize.literal(
+                    //         '(SELECT GROUP_CONCAT(o.name SEPARATOR ",") FROM `JobOperation` jo JOIN operations o ON jo.operationId = o.id WHERE jo.jobId = `Job`.`id`)'
+                    //     ),
+                    //     'operations'
+                    // ],
                 ],
                 exclude: [
                     'ClientId',
@@ -82,7 +107,6 @@ async function getFilteredJobsService(
             }
         });
 
-        const { count: totalItems, rows: itemData } = items;
         const totalPages = Math.ceil(totalItems / (limit || 10));
 
         return {
@@ -91,8 +115,8 @@ async function getFilteredJobsService(
             totalPages,
             hasNextPage: page < totalPages,
             limit,
-            countInCurrentPage: itemData.length,
-            items: itemData
+            countInCurrentPage: items.length,
+            items
         };
     } catch (error) {
         throw error;

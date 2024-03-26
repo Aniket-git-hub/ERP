@@ -10,7 +10,8 @@ async function addJobController(req, res, next) {
         materialId,
         date,
         imageUrl,
-        operations
+        operations,
+        operationCosts,
     } = req.body;
     const { userId } = req.user;
     try {
@@ -24,7 +25,8 @@ async function addJobController(req, res, next) {
             clientId,
             materialId,
             imageUrl,
-            operations
+            operations,
+            operationCosts
         );
         res.status(201).json({
             job,

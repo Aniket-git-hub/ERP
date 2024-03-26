@@ -64,9 +64,12 @@ export async function deleteOperationService(userId, operationId) {
 
 export async function getAllOperationsService(userId) {
     try {
+        console.log("Now i am in services", userId);
         const operations = await OPERATIONS.findAll({
             where: { userId }
         });
+
+        console.log(operations)
         return operations;
     } catch (error) {
         throw error;
