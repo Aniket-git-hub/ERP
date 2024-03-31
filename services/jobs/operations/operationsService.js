@@ -64,12 +64,16 @@ export async function deleteOperationService(userId, operationId) {
 
 export async function getAllOperationsService(userId) {
     try {
-        console.log("Now i am in services", userId);
         const operations = await OPERATIONS.findAll({
-            where: { userId }
+            where: { userId },
+            attributes: [
+                ['id', 'value'],
+                ['id', 'id'],
+                ['name', 'label'],
+                ['name', 'name']
+            ]
         });
 
-        console.log(operations)
         return operations;
     } catch (error) {
         throw error;
@@ -78,6 +82,7 @@ export async function getAllOperationsService(userId) {
 
 export async function getOperationByIdService(userId, operationId) {
     try {
+
         const operation = await OPERATIONS.findByPk(operationId, {
             where: { userId }
         });

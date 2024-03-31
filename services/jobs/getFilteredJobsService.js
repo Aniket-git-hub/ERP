@@ -41,11 +41,36 @@ async function getFilteredJobsService(
 
     try {
 
+        const [totalItems, items] = await Promise.all([
+            getTotalItems(userId, whereClause),
+            getItems(userId, whereClause, offset, limit, excludedFields)
+        ])
+
+        const totalPages = Math.ceil(totalItems / (limit || 10));
+
+        return {
+            totalItems,
+            currentPage: page,
+            totalPages,
+            hasNextPage: page < totalPages,
+            limit,
+            countInCurrentPage: items.length,
+            items
+        };
+    } catch (error) {
+        throw error;
+    }
+
+    async function getTotalItems() {
         const totalItems = await JOB.count({
-            where: { userId }
+            where: { userId, ...whereClause }, col: 'id'
         });
 
-        const items = await JOB.findAll({
+        return totalItems
+    }
+
+    async function getItems() {
+        return await JOB.findAll({
             offset,
             limit: limit || undefined,
             where: {
@@ -70,17 +95,15 @@ async function getFilteredJobsService(
                     attributes: ['id', 'name', 'hardness', 'density']
                 },
                 {
-                    model: OPERATIONS,
-                    attributes: ['name'],
-                    through: {
-                        attributes: [],
-                    },
-                },
-                {
                     model: OPERATION_COST,
-                    attributes: ['cost'],
+                    attributes: ['id', 'cost'],
+                    include: [
+                        {
+                            model: OPERATIONS,
+                            attributes: ['id', 'name']
+                        }
+                    ]
                 }
-
             ],
             attributes: {
                 include: [
@@ -106,21 +129,9 @@ async function getFilteredJobsService(
                 ]
             }
         });
-
-        const totalPages = Math.ceil(totalItems / (limit || 10));
-
-        return {
-            totalItems,
-            currentPage: page,
-            totalPages,
-            hasNextPage: page < totalPages,
-            limit,
-            countInCurrentPage: items.length,
-            items
-        };
-    } catch (error) {
-        throw error;
     }
 }
 
 export default getFilteredJobsService;
+
+

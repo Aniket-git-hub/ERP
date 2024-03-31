@@ -11,7 +11,8 @@ async function createInvoiceController(req, res, next) {
         sGst,
         notes,
         totalQuantity,
-        totalAmount
+        totalAmount,
+        isPaid,
     } = req.body;
     const { userId } = req.user;
     try {
@@ -26,8 +27,12 @@ async function createInvoiceController(req, res, next) {
             sGst,
             notes,
             totalQuantity,
-            totalAmount
+            totalAmount,
+            isPaid
         );
+
+        // console.log(req.body)
+
         res.status(201).json({
             invoice,
             message: 'Invoice created successfully'

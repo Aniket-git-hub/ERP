@@ -5,7 +5,7 @@ export async function addOperationController(req, res, next) {
     const { userId } = req.user;
     try {
         const operation = await addOperationService(userId, operationData);
-        res.status(201).json(operation);
+        res.status(201).json({ operation, message: "Operation added successfully" });
     } catch (error) {
         next(error);
     }
@@ -22,7 +22,7 @@ export async function updateOperationController(req, res, next) {
             operationId,
             operationData
         );
-        res.json(updatedOperation);
+        res.json({ updatedOperation, message: "Operation updated successfully" });
     } catch (error) {
         next(error);
     }
@@ -33,7 +33,7 @@ export async function deleteOperationController(req, res, next) {
     const { userId } = req.user;
     try {
         const result = await deleteOperationService(userId, operationId);
-        res.json(result);
+        res.json({ message: "operation deleted" });
     } catch (error) {
         next(error);
     }

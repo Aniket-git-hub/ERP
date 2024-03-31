@@ -13,7 +13,8 @@ async function createInvoiceService(
     sGstPercentage,
     notes,
     totalQuantity,
-    totalAmount
+    totalAmount,
+    isPaid,
 ) {
     try {
         let totalAmountBeforeTax = +totalAmount;
@@ -32,13 +33,13 @@ async function createInvoiceService(
                         Sequelize.fn(
                             'sum',
                             Sequelize.literal(
-                                'COALESCE((quantity * COALESCE(millingRate, 0) + quantity * COALESCE(drillingRate, 0)), 0)'
+                                '`Job`.`quantity` * (SELECT SUM(`cost`) FROM `operation_costs` WHERE `operation_costs`.`jobId` = `Job`.`id`)'
                             )
                         ),
                         'totalAmount'
                     ]
                 ],
-                raw: true
+                // raw: true
             });
             totalAmountBeforeTax = parseFloat(jobs[0].totalAmount);
             totalQuantityBilled = parseInt(jobs[0].totalQuantity);
@@ -54,7 +55,8 @@ async function createInvoiceService(
             iGstPercentage,
             sGstPercentage,
             totalAmountBeforeTax,
-            notes
+            notes,
+            paymentReceived: isPaid == 'true' ? true : false
         });
         await invoice.addJobs(jobIds);
 
