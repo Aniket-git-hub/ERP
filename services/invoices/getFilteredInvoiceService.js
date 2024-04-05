@@ -23,7 +23,7 @@ async function getFilteredInvoiceService(
             offset,
             limit,
             where: { userId, ...whereClause },
-            order: [['createdAt', 'DESC']],
+            order: [['invoiceDate', 'DESC']],
             include: [
                 {
                     model: CLIENT,

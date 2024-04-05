@@ -6,8 +6,8 @@ async function getFilteredInvoiceController(req, res, next) {
     try {
         const result = await getFilteredInvoicesService(
             userId,
-            page,
-            limit,
+            parseInt(page),
+            parseInt(limit),
             filters
         );
         res.send(result);

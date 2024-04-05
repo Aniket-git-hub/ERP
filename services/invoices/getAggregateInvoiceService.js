@@ -4,22 +4,24 @@ import INVOICE from "../../models/work/invoiceModel.js";
 
 
 async function getAggregateInvoiceService(userId, type, year, month) {
-    try {
-        let whereCondition = {
-            userId: userId
-        };
 
-        if (type === 'monthly') {
-            whereCondition.createdAt = {
-                [Op.gte]: new Date(year, month - 1, 1),
-                [Op.lt]: new Date(year, month, 1)
-            };
-        } else if (type === 'yearly') {
-            whereCondition.createdAt = {
-                [Op.gte]: new Date(year, 0, 1),
-                [Op.lt]: new Date(year + 1, 0, 1)
-            };
-        }
+    let whereCondition = {
+        userId: userId
+    };
+
+    if (type === 'monthly') {
+        whereCondition.invoiceDate = {
+            [Op.gte]: new Date(year, month - 1, 1),
+            [Op.lt]: new Date(year, month, 1)
+        };
+    } else if (type === 'yearly') {
+        whereCondition.invoiceDate = {
+            [Op.gte]: new Date(year, 0, 1),
+            [Op.lt]: new Date(year + 1, 0, 1)
+        };
+    }
+
+    try {
 
         // Total number of invoices
         const totalInvoices = await INVOICE.count({

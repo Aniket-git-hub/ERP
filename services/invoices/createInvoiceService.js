@@ -1,4 +1,5 @@
 import { Op, Sequelize } from 'sequelize';
+import sequelize from '../../config/database.js';
 import INVOICE from '../../models/work/invoiceModel.js';
 import JOB from '../../models/work/jobModel.js';
 
@@ -16,6 +17,9 @@ async function createInvoiceService(
     totalAmount,
     isPaid,
 ) {
+
+    const transaction = await sequelize.transaction();
+
     try {
         let totalAmountBeforeTax = +totalAmount;
         let totalQuantityBilled = +totalQuantity;
@@ -39,7 +43,8 @@ async function createInvoiceService(
                         'totalAmount'
                     ]
                 ],
-                // raw: true
+                raw: true,
+                transaction,
             });
             totalAmountBeforeTax = parseFloat(jobs[0].totalAmount);
             totalQuantityBilled = parseInt(jobs[0].totalQuantity);
@@ -56,12 +61,16 @@ async function createInvoiceService(
             sGstPercentage,
             totalAmountBeforeTax,
             notes,
-            paymentReceived: isPaid == 'true' ? true : false
-        });
-        await invoice.addJobs(jobIds);
+            paymentReceived: isPaid && isPaid == 'true' ? true : false
+        }, { transaction });
+
+        await invoice.addJobs(jobIds, { transaction });
+
+        await transaction.commit();
 
         return invoice;
     } catch (error) {
+        await transaction.rollback()
         throw error;
     }
 }

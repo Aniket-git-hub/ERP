@@ -7,6 +7,8 @@ import TRANSACTIONS from './budget/transactions.js';
 import ADVANCE from './employee/advanceModel.js';
 import ATTENDANCE from './employee/attendanceModel.js';
 import DEDUCTION from './employee/deductionModel.js';
+import DEPARTMENT from './employee/departmentModel.js';
+import DESIGNATION from './employee/designationModel.js';
 import EMPLOYEE from './employee/employeeModel.js';
 import PAYMENT_RECEIPT from './employee/paymentReceiptModel.js';
 import CLIENT from './work/clientModel.js';
@@ -54,6 +56,10 @@ function setupAssociations() {
     USER.hasMany(DEDUCTION);
     USER.hasMany(EMPLOYEE);
     USER.hasMany(PAYMENT_RECEIPT);
+    USER.hasMany(DEPARTMENT);
+    USER.hasMany(DESIGNATION);
+    DESIGNATION.belongsTo(USER);
+    DEPARTMENT.belongsTo(USER);
     ATTENDANCE.belongsTo(USER);
     ADVANCE.belongsTo(USER);
     DEDUCTION.belongsTo(USER);
@@ -74,6 +80,12 @@ function setupAssociations() {
     PAYMENT_RECEIPT.hasMany(ATTENDANCE);
     ATTENDANCE.belongsTo(PAYMENT_RECEIPT);
 
+    DEPARTMENT.hasMany(EMPLOYEE)
+    EMPLOYEE.belongsTo(DEPARTMENT)
+    DEPARTMENT.hasMany(DESIGNATION);
+    DESIGNATION.belongsTo(DEPARTMENT);
+    DESIGNATION.hasMany(EMPLOYEE);
+    EMPLOYEE.belongsTo(DESIGNATION);
     // budget
     USER.hasMany(BUDGET);
     BUDGET.belongsTo(USER);
