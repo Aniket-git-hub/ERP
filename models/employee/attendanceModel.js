@@ -8,17 +8,13 @@ const ATTENDANCE = sequelize.define('attendance', {
         primaryKey: true,
         allowNull: false
     },
-    date: {
+    checkTime: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
     },
-    inTime: {
-        type: DataTypes.TIME,
+    punchType: {
+        type: DataTypes.ENUM('in', 'out'),
         allowNull: false
-    },
-    outTime: {
-        type: DataTypes.TIME,
-        allowNull: true
     }
 });
 

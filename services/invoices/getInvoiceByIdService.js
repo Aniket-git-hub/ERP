@@ -1,6 +1,8 @@
 import CLIENT from '../../models/work/clientModel.js';
 import INVOICE from '../../models/work/invoiceModel.js';
 import JOB from '../../models/work/jobModel.js';
+import OPERATION_COST from "../../models/work/operationCostModel.js";
+import OPERATION from "../../models/work/operationModel.js";
 import CustomError from '../../utils/createError.js';
 
 async function getInvoiceByIdService(userId, invoiceId) {
@@ -20,7 +22,7 @@ async function getInvoiceByIdService(userId, invoiceId) {
                 },
                 {
                     model: JOB,
-                    attributes: ['id', 'drawingNumber', 'quantity', 'rate']
+                    include: [OPERATION, OPERATION_COST]
                 }
             ],
             attributes: {
