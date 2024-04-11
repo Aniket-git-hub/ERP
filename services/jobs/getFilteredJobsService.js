@@ -114,12 +114,6 @@ async function getFilteredJobsService(
                         ),
                         'total'
                     ],
-                    // [
-                    //     Sequelize.literal(
-                    //         '(SELECT GROUP_CONCAT(o.name SEPARATOR ",") FROM `JobOperation` jo JOIN operations o ON jo.operationId = o.id WHERE jo.jobId = `Job`.`id`)'
-                    //     ),
-                    //     'operations'
-                    // ],
                 ],
                 exclude: [
                     'ClientId',

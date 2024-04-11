@@ -1,17 +1,16 @@
 import getAttendanceService from '../../../services/employees/attendance/getAttendanceService.js';
 
-async function getAttendanceByMonthController(req, res, next) {
+async function getFilteredAttendanceController(req, res, next) {
     const { userId } = req.user;
-    const { employeeId } = req.params;
-    const { date } = req.query;
+    const { page = 1, limit = 10 } = req.query;
+    const filters = req.query;
+
     try {
-        const attendance = await getAttendanceService(userId, employeeId, date);
-        res.json({
-            attendance
-        });
+        const attendance = await getAttendanceService(userId, parseInt(page), parseInt(limit), filters);
+        res.json(attendance);
     } catch (error) {
         next(error);
     }
 }
 
-export default getAttendanceByMonthController;
+export default getFilteredAttendanceController;

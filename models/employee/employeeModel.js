@@ -22,6 +22,12 @@ const EMPLOYEE = sequelize.define('employee', {
             len: [1, 30]
         }
     },
+    name: {
+        type: DataTypes.VIRTUAL,
+        get() {
+            return `${this.firstName} ${this.lastName}`;
+        }
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: true,
