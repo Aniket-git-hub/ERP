@@ -10,9 +10,6 @@ const errorTypeMap = {
         message: (error) => error.errors[0].message
     },
     SyntaxError: { status: 401, message: (error) => 'Invalid Syntax' },
-    AppointmentBooking: { status: 401, message: (error) => error.message },
-    AddCourse: { status: 401, message: (error) => error.message },
-    EnrollmentError: { status: 401, message: (error) => error.message }
 };
 
 function errorHandler(error, req, res, next) {
