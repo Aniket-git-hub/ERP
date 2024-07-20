@@ -10,5 +10,9 @@ const router = express.Router();
 
 router.post('/login', loginValidation, loginController);
 router.post('/register', registerValidation, registerController);
+router.post('/forgot-password',);
+router.post('/verify-otp',);
+router.post('/reset-password',);
+router.post('/cancel-reset',);
 
 export default router;

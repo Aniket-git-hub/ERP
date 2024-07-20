@@ -58,7 +58,17 @@ const USER = sequelize.define('user', {
         validate: {
             len: [0, 500]
         }
-    }
+    },
+    accountStatus: {
+        type: DataTypes.ENUM('frozen', 'blocked', 'active'),
+        allowNull: true,
+        default: 'active'
+    },
+    failedOtpAttempts: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        default: 0,
+    },
 });
 
 export default USER;

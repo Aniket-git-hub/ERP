@@ -30,7 +30,6 @@ async function registrationController(req, res, next) {
             err.errors = error.errors.map((e) => e.msg);
             next(err);
         }
-        console.log(error);
         next(error);
     }
 }
