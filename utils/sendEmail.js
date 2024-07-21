@@ -1,4 +1,5 @@
 import transporter from '../config/nodemailer.js';
+import wrapper from './emailTemplates/wrapper.js';
 import getEnvVariable from './env.js';
 
 async function sendEmail(email, subject, template) {
@@ -6,7 +7,7 @@ async function sendEmail(email, subject, template) {
         from: getEnvVariable('NODEMAILER_USER'),
         to: email,
         subject: subject,
-        html: template
+        html: wrapper(template)
     };
     try {
         const response = await transporter.sendMail(mailOptions);

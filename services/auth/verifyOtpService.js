@@ -1,7 +1,7 @@
 import OTP from "../../models/work/otpModel.js";
 import USER from "../../models/work/userModel.js";
 import CustomError from "../../utils/createError.js";
-import logActivity from "../../utils/logActivity.js";
+// import logActivity from "../../utils/logActivity.js";
 
 const MAX_FAILED_ATTEMPTS = 3
 
@@ -30,7 +30,8 @@ async function verifyOtpService(email, otp) {
     await OTP.destroy({ where: { email, otp } });
     await USER.update({ failedOtpAttempts: 0 }, { where: { email } });
 
-    logActivity(email, 'OTP Verified');
+    // logActivity(email, 'OTP Verified');
+
 }
 
 export default verifyOtpService;

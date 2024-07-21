@@ -48,3 +48,19 @@ export const loginValidation = [
         .isLength({ min: 6, max: 30 })
         .withMessage('Password must be between 6 and 30 characters')
 ];
+
+export const forgotPasswordValidation = [
+    body('email').trim().isEmail().withMessage('Invalid email address'),
+];
+
+export const otpValidation = [
+    body('email').trim().isEmail().withMessage('Invalid email address'),
+    body('otp')
+        .trim()
+        .notEmpty()
+        .withMessage('OTP is required')
+        .isLength({ min: 6, max: 6 })
+        .withMessage('OTP must be 6 digits')
+        .isNumeric()
+        .withMessage('OTP must be a number'),
+];

@@ -25,7 +25,7 @@ async function registrationController(req, res, next) {
             { expiresIn: '1h' }
         );
 
-        await sendEmail(user.email, "Welcome to letsbug solutions family", registrationWelcomeEmail("Madhu", "tanisha"))
+        await sendEmail(user.email, "Welcome to letsbug ERP family", registrationWelcomeEmail(user.firstName))
 
         res.status(201).json({ user, token, message: 'New user created' });
     } catch (error) {

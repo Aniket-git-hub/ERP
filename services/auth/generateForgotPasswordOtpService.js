@@ -1,8 +1,10 @@
+import crypto from 'crypto';
+import { Op } from "sequelize";
 import OTP from "../../models/work/otpModel.js";
 import USER from "../../models/work/userModel.js";
 import CustomError from "../../utils/createError.js";
 
-const OTP_REQUEST_LIMIT = 5;
+const OTP_REQUEST_LIMIT = 15;
 const OTP_REQUEST_WINDOW_MS = 15 * 60 * 1000;
 
 async function generateForgotPasswordOtpService(email) {
@@ -26,11 +28,11 @@ async function generateForgotPasswordOtpService(email) {
     }
 
     const otp = crypto.randomInt(100000, 999999).toString();
-    const expiresAt = new Date(Date.now() + 2 * 60 * 1000); // 2 minutes expiry
+    const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
 
-    await OTP.create({ email, otp, expiresAt });
+    const savedOTP = await OTP.create({ email, otp, expiresAt });
 
-    // SEND OTP VIA EMAIL HERE
+    return savedOTP
 }
 
 
