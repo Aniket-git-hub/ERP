@@ -2,7 +2,9 @@ import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import registerService from '../../services/auth/registerService.js';
 import CustomError from '../../utils/createError.js';
+import { registrationWelcomeEmail } from '../../utils/emailTemplates/auth/registrationWelcome.js';
 import getEnvVariable from '../../utils/env.js';
+import sendEmail from '../../utils/sendEmail.js';
 
 async function registrationController(req, res, next) {
     try {
@@ -22,6 +24,8 @@ async function registrationController(req, res, next) {
             getEnvVariable('JWT_SECRET'),
             { expiresIn: '1h' }
         );
+
+        await sendEmail(user.email, "Welcome to letsbug solutions family", registrationWelcomeEmail("Madhu", "tanisha"))
 
         res.status(201).json({ user, token, message: 'New user created' });
     } catch (error) {

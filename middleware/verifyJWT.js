@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import CustomError from '../utils/createError.js';
 import getEnvVariable from '../utils/env.js';
 
-function verifyJWT(req, res, next) {
+async function verifyJWT(req, res, next) {
     let token;
     let secret;
 
@@ -12,8 +12,9 @@ function verifyJWT(req, res, next) {
     } else {
         throw new CustomError('JsonWebTokenError', 'No token provided');
     }
+
     try {
-        if (process.env.NODE_ENV === 'production') {
+        if (getEnvVariable('NODE_ENV') === 'production') {
             const decoded = jwt.verify(token, secret);
             req.user = decoded;
         } else {

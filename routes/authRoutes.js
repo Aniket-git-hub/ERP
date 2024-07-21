@@ -14,5 +14,6 @@ router.post('/forgot-password',);
 router.post('/verify-otp',);
 router.post('/reset-password',);
 router.post('/cancel-reset',);
+router.post('/verify-email',);
 
 export default router;
