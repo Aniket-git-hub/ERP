@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon index.js",
+        "dev": "nodemon server.js",
         "format": "prettier --write .",
         "check-format": "prettier --check ."
     },
@@ -24,11 +24,12 @@
         "jsonwebtoken": "^9.0.2",
         "mysql2": "^3.6.5",
         "nodemailer": "^6.9.8",
-        "puppeteer": "^21.6.1",
+        "puppeteer": "^22.14.0",
         "sequelize": "^6.35.2"
     },
     "devDependencies": {
         "nodemon": "3.0.2",
-        "prettier": "^3.1.1"
+        "prettier": "^3.1.1",
+        "sequelize-cli": "^6.6.2"
     }
 }
