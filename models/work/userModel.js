@@ -6,26 +6,19 @@ const USER = sequelize.define('user', {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false
     },
     firstName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
-        validate: {
-            len: [1, 30]
-        }
     },
     lastName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
-        validate: {
-            len: [1, 30]
-        }
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
         validate: {
             isEmail: true
         }
@@ -33,12 +26,9 @@ const USER = sequelize.define('user', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            len: [6, Infinity]
-        }
     },
     mobileNumber: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(11),
         allowNull: false,
         validate: {
             isNumeric: true,
@@ -46,28 +36,20 @@ const USER = sequelize.define('user', {
         }
     },
     companyName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: true,
-        validate: {
-            len: [1, 30]
-        }
     },
     address: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(500),
         allowNull: true,
-        validate: {
-            len: [0, 500]
-        }
     },
     accountStatus: {
         type: DataTypes.ENUM('frozen', 'blocked', 'active'),
-        allowNull: true,
-        default: 'active'
+        defaultValue: 'active',
     },
     failedOtpAttempts: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        default: 0,
+        defaultValue: 0,
     },
     emailVerificationToken: {
         type: DataTypes.STRING,
